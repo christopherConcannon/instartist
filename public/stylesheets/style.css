@@ -1,3 +1,17 @@
 .img-thumbnail {
   border: none;
 }
+
+.flex-column {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+}
+
+.flex-grow-1 {
+	flex-grow: 1;
+}
+
+.flex-shrink-0 {
+	flex-shrink: 0;
+}
