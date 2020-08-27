@@ -1,9 +1,12 @@
 const router = require('express').Router();
 const { Post, User, Comment } = require('../../models');
 const withAuth = require('../../utils/auth');
+const imgUpload = require('../../config/imgUpload');
 
 // POST /api/posts
 router.post('/', withAuth, (req, res) => {
+// router.post('/', withAuth, imgUpload.single('work-img'), (req, res) => {
+  // console.log(req.file);
 	Post.create({
 		title   : req.body.title,
 		content : req.body.content,

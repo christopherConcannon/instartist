@@ -1,4 +1,4 @@
-<form id="new-post-form" class="card">
+{{!-- <form id="new-post-form" class="card">
   <div class="card-header"><h3>Create New Post</h3></div>
   <div class="card-body">
     <div>
@@ -12,4 +12,12 @@
     <button type="submit" class="btn">Create</button>
   </div>
 </form>
-<script src="/javascript/add-post.js"></script>
+<script src="/javascript/add-post.js"></script> --}}
+
+<form action="/api/posts" method="post" enctype="multipart/form-data">
+  <div class="form-group">
+    <label for="work-img">Example file input</label>
+    <input type="file" class="form-control-file" id="work-img" name="work-img">
+  </div>
+  <button type="submit" class="btn btn-primary">Create</button>
+</form>

@@ -90,7 +90,7 @@ router.get('/edit/:id', withAuth, (req, res) => {
 // GET /dashboard/new
 router.get('/new', withAuth, (req, res) => {
 	res.render('add-post', {
-		layout : 'dashboard'
+		// layout : 'dashboard'
 	});
 });
 
