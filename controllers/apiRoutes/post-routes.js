@@ -5,12 +5,12 @@ const withAuth = require('../../utils/auth');
 // POST /api/posts
 router.post('/', withAuth, (req, res) => {
 	Post.create({
-		title: req.body.title,		
-		upload_img:req.body.upload_img,		
-		dimension:req.body.dimension,
-		description:req.body.description,
-		media:req.body.media,		
-		user_id : req.session.user_id
+		title: req.body.title,
+		upload_img: req.body.upload_img,
+		dimension: req.body.dimension,
+		description: req.body.description,
+		media: req.body.media,
+		user_id: req.session.user_id
 	})
 		.then((dbPostData) => res.json(dbPostData))
 		.catch((err) => {
@@ -23,12 +23,15 @@ router.post('/', withAuth, (req, res) => {
 router.put('/:id', (req, res) => {
 	Post.update(
 		{
-			title   : req.body.title,
-			//content : req.body.content
+			title: req.body.title,
+			upload_img: req.body.upload_img,
+			dimension: req.body.dimension,
+			description: req.body.description,
+			media: req.body.media,
 		},
 		{
-			where : {
-				id : req.params.id
+			where: {
+				id: req.params.id
 			}
 		}
 	)
@@ -48,8 +51,8 @@ router.put('/:id', (req, res) => {
 // DELETE /api/posts/1
 router.delete('/:id', withAuth, (req, res) => {
 	Post.destroy({
-		where : {
-			id : req.params.id
+		where: {
+			id: req.params.id
 		}
 	})
 		.then((dbPostData) => {
