@@ -36,7 +36,19 @@ User.init(
 			validate  : {
 				len : [ 4 ]
 			}
-		}
+    },
+    bio: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    medium: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    interests: {
+      type: DataTypes.STRING,
+      allowNull: true
+    }
 	},
 	{
 		hooks           : {

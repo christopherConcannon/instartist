@@ -1,7 +1,7 @@
 {
   "name": "instartist",
   "version": "1.0.0",
-  "description": "CMS-style blog site where developers can publish their tech-related blog posts and comment on other developers' posts as well",
+  "description": "artist social site",
   "main": "server.js",
   "dependencies": {
     "bcrypt": "^5.0.0",
