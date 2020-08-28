@@ -94,6 +94,17 @@ router.get('/new', withAuth, (req, res) => {
 	});
 });
 
+router.post('/photo', (req,res) => {
+	Post.create({
+		title: req.body.title,
+		content: req.body.content,
+		photo_url: req.body.photo_url
+	}).then((data) => {
+		res.send(data)
+	})
+	
+})
+
 // GET /dashboard/edit/1
 router.get('/edit/:id', withAuth, (req, res) => {
 	Post.findOne({
