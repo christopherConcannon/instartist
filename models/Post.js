@@ -15,24 +15,25 @@ Post.init(
 			type: DataTypes.STRING,
 			allowNull: false
     },
-    
-		upload_img: { // isUrl: true,   ver q va a guardar
-			type: DataTypes.STRING,
-			allowNull: false
-    },
-    
 		dimension: {
-			type: DataTypes.STRING,
+      type: DataTypes.STRING,
 			allowNull: false
 		},
 		description: {
-			type: DataTypes.STRING,
+      type: DataTypes.STRING,
 			allowNull: false
 		},
 		media: {
-			type: DataTypes.STRING,
+      type: DataTypes.STRING,
 			allowNull: false
 		},
+    img_url: { // isUrl: true,   ver q va a guardar
+      type: DataTypes.STRING,
+      allowNull: false,
+			validate: {
+				isEmail: true
+			}
+    },
 		
 		user_id: {
 			type: DataTypes.INTEGER,

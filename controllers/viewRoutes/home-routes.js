@@ -23,8 +23,6 @@ router.get('/', (req, res) => {
 	})
 		.then((dbPostData) => {
 			const posts = dbPostData.map((post) => post.get({ plain: true }));
-      // do we have access to the the post.user_id at each iteration that we could map a new prop to the object we send to the template, which will be associated with each post, that will indicate if the author is the logged in user?
-
 			res.render('homepage', {
 				posts,
         loggedIn : req.session.loggedIn

@@ -10,7 +10,7 @@ router.get('/', withAuth, (req, res) => {
 			// use the ID from the session
 			user_id : req.session.user_id
 		},
-		attributes : [ 'id', 'title','upload_img','dimension','description','media','created_at' ],
+		attributes : [ 'id', 'title','dimension','description','media','img_url', 'created_at' ],
 		order      : [ [ 'created_at', 'DESC' ] ],
 		include    : [
 			{
@@ -50,7 +50,7 @@ router.get('/edit/:id', withAuth, (req, res) => {
 		where      : {
 			id : req.params.id
 		},
-		attributes :  [ 'id', 'title','upload_img','dimension','description','media','created_at' ],
+		attributes :  [ 'id', 'title','dimension','description','media','img_url', 'created_at' ],
 		include    : [
 			{
 				model      : Comment,
