@@ -14,13 +14,13 @@ Post.init(
 		title: {
 			type: DataTypes.STRING,
 			allowNull: false
-		},
-		
+    },
+    
 		upload_img: { // isUrl: true,   ver q va a guardar
 			type: DataTypes.STRING,
 			allowNull: false
-		},
-		
+    },
+    
 		dimension: {
 			type: DataTypes.STRING,
 			allowNull: false
