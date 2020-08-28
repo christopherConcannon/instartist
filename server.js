@@ -13,12 +13,12 @@ const SequelizeStore = require("connect-session-sequelize")(session.Store);
 
 // set up express session and connect session to Sequelize db
 const sess = {
-  secret: process.env.SESS_SECRET,
+  secret: "Super secret secret",
   cookie: {},
   resave: false,
   saveUninitialized: true,
   store: new SequelizeStore({
-      db: sequelize
+    db: sequelize
   })
 };
 
