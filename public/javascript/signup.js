@@ -10,6 +10,9 @@ async function signupFormHandler(event) {
   const username = document.querySelector('#username-signup').value.trim();
   const email = document.querySelector('#email-signup').value.trim();
   const password = document.querySelector('#password-signup').value.trim();
+  const bio = document.querySelector('#bio').value.trim();
+  const medium = document.querySelector('#medium').value.trim();
+  const interests = document.querySelector('#interests').value.trim();
 
 
   // if all signup fields are filled out, make POST request to api/users route to create new user
@@ -18,35 +21,11 @@ async function signupFormHandler(event) {
       method: 'post',
       body: JSON.stringify({
         username,
-        password
-      }),
-      headers: { 'Content-Type': 'application/json' }
-    });
-    console.log(response);
-
-    // check the response status
-    if (response.ok) {
-      document.location.replace('/dashboard/');
-    } else {
-      alert(response.statusText);
-    }
-  }
-}
-
-async function addInfoFormHandler(event) {
-  event.preventDefault();
-
-  const bio = document.querySelector('#bio');
-  const medium = document.querySelector('#bio');
-  const location = document.querySelector('#bio');
-
-  if (button.clicked == true) {
-    const response = await fetch('/api/users', {
-      method: 'post',
-      body: JSON.stringify({
+        password,
+        email,
         bio,
         medium,
-        location
+        interests
       }),
       headers: { 'Content-Type': 'application/json' }
     });
@@ -62,4 +41,4 @@ async function addInfoFormHandler(event) {
 }
 
 document.querySelector('#signup-form').addEventListener('submit', signupFormHandler);
-document.querySelector('#signup-form').addEventListener('submit', addInfoFormHandler);
+
