@@ -33,7 +33,7 @@ router.get('/', withAuth, (req, res) => {
       
 			// render template and pass through db data
 			res.render('dashboard', {
-				layout   : 'dashboard',
+				// layout   : 'dashboard',
 				posts,
 				loggedIn : true
 			});
