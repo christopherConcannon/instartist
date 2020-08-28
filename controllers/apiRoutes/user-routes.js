@@ -52,10 +52,12 @@ router.get('/:id', (req, res) => {
 // POST /api/users -- create user on signup
 router.post('/', (req, res) => {
 	User.create({
-		username : req.body.username,
-		email:req.body.email,
-		password : req.body.password,
-
+		username : req.body.username,	
+    email: req.body.email,
+    password : req.body.password,
+    bio: req.body.bio,
+    medium: req.body.medium,
+    interests: req.body.interests
 	}).then((dbUserData) => {
 		req.session.save(() => {
 			req.session.user_id = dbUserData.id;

@@ -2,6 +2,8 @@
   border: none;
 }
 
+
+/* getting footer to stay at bottom */
 .flex-column {
 	display: flex;
 	flex-direction: column;
