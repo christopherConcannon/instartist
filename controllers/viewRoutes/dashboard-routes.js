@@ -23,13 +23,15 @@ router.get('/', withAuth, (req, res) => {
 			},
 			{
 				model      : User,
-				attributes : [ 'username' ]
+				attributes : [ 'username', 'bio', 'medium', 'interests' ]
 			}
 		]
 	})
 		.then((dbPostData) => {
 			// serialize data before passing to template
       const posts = dbPostData.map((post) => post.get({ plain: true }));
+
+      console.log(posts);
       
 			// render template and pass through db data
 			res.render('dashboard', {
