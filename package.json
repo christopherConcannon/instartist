@@ -1,7 +1,7 @@
 {
   "name": "instartist",
   "version": "1.0.0",
-  "description": "",
+  "description": "artist social site",
   "main": "server.js",
   "dependencies": {
     "bcrypt": "^5.0.0",
