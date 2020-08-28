@@ -4,7 +4,7 @@ const { Post, User, Comment } = require('../../models');
 // '/' homepage -- display index of all posts
 router.get('/', (req, res) => {
 	Post.findAll({
-		attributes :  [ 'id', 'title','upload_img','dimension','description','media','created_at' ],
+		attributes :  [ 'id', 'title','dimension','description','media','img_url', 'created_at' ],
 		order      : [ [ 'created_at', 'DESC' ] ],
 		include    : [
 			{
@@ -40,7 +40,7 @@ router.get('/post/:id', (req, res) => {
 		where      : {
 			id : req.params.id
 		},
-		attributes :[ 'id', 'title','upload_img','dimension','description','media','created_at' ],
+		attributes :[ 'id', 'title','dimension','description','media','img_url', 'created_at' ],
 		include    : [
 			{
 				model      : Comment,

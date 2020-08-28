@@ -31,10 +31,9 @@ Post.init(
       type: DataTypes.STRING,
       allowNull: false,
 			validate: {
-				isEmail: true
+				isUrl: true
 			}
     },
-		
 		user_id: {
 			type: DataTypes.INTEGER,
 			references: {

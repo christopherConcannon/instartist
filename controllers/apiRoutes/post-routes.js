@@ -4,16 +4,17 @@ const withAuth = require('../../utils/auth');
 const imgUpload = require('../../config/imgUpload');
 
 // POST /api/posts
-router.post('/', withAuth, (req, res) => {
-// router.post('/', withAuth, imgUpload.single('work-img'), (req, res) => {
-  // console.log(req.file);
+// router.post('/', withAuth, (req, res) => {
+router.post('/', withAuth, imgUpload.single('work-img'), (req, res) => {
+  console.log(req.file);
+  console.log(req.body);
 	Post.create({
 		title: req.body.title,		
-		upload_img:req.body.upload_img,		
-		dimension:req.body.dimension,
-		description:req.body.description,
-		media:req.body.media,		
-		user_id : req.session.user_id
+		dimension: req.body.dimensions,
+		description :req.body.description,
+		media: req.body.media,		
+		img_url: req.file.path,		
+		user_id : req.session.user_id,
 	})
 		.then((dbPostData) => res.json(dbPostData))
 		.catch((err) => {
