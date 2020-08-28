@@ -24,11 +24,14 @@ router.post('/', withAuth, imgUpload.single('work-img'), (req, res) => {
 });
 
 // PUT /api/posts/1
-router.put('/:id', (req, res) => {
+router.put('/:id', withAuth, imgUpload.single('work-img'), (req, res) => {
 	Post.update(
 		{
-			title   : req.body.title,
-			//content : req.body.content
+      title: req.body.title,		
+      dimension: req.body.dimensions,
+      description :req.body.description,
+      media: req.body.media,		
+      img_url: req.file.path,
 		},
 		{
 			where : {

@@ -31,7 +31,7 @@ async function newFormHandler(event) {
 
 	const form = document.querySelector('#new-post-form');
 
-	var formData = new FormData(form);
+	const formData = new FormData(form);
 
 	const response = await fetch(`/api/posts`, {
 		method : 'POST',
@@ -39,8 +39,8 @@ async function newFormHandler(event) {
 	});
 
 	if (response.ok) {
-		// document.location.replace('/dashboard');
-		document.location.replace('/');
+		document.location.replace('/dashboard');
+		// document.location.replace('/');
 	} else {
 		alert(response.statusText);
 	}
