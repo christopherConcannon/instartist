@@ -18,7 +18,7 @@ const sess = {
   resave: false,
   saveUninitialized: true,
   store: new SequelizeStore({
-      db: sequelize
+    db: sequelize
   })
 };
 
@@ -32,6 +32,6 @@ app.set('view engine', 'handlebars');
 app.use(routes);
 
 // sequelize.sync({ force: true }).then(() => {
-sequelize.sync({ force: false }).then(() => {
+sequelize.sync({ force: false}).then(() => {
   app.listen(PORT, () => console.log(`Now listening on PORT ${PORT}`));
 });
