@@ -5,8 +5,11 @@ const withAuth = require('../../utils/auth');
 // POST /api/posts
 router.post('/', withAuth, (req, res) => {
 	Post.create({
-		title   : req.body.title,
-		content : req.body.content,
+		title: req.body.title,		
+		upload_img:req.body.upload_img,		
+		dimension:req.body.dimension,
+		description:req.body.description,
+		media:req.body.media,		
 		user_id : req.session.user_id
 	})
 		.then((dbPostData) => res.json(dbPostData))
@@ -21,7 +24,7 @@ router.put('/:id', (req, res) => {
 	Post.update(
 		{
 			title   : req.body.title,
-			content : req.body.content
+			//content : req.body.content
 		},
 		{
 			where : {
