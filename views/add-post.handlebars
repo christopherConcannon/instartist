@@ -7,7 +7,8 @@
   <button type="submit" class="btn btn-primary">Create</button>
 </form> --}}
 
-{{!-- NEED TO IMPLEMENT JS HANDLING OF HTTP REQUEST --}}
+
+
 <form id="new-post-form">
   <div class="form-group">
     <label for="title">Title of work</label>
@@ -27,9 +28,12 @@
   </div>
   <div class="form-group">
     <label for="work-img">Example file input</label>
-    <input type="file" class="form-control-file" id="work-img" name="work-img">
+    <input type="file" class="form-control-file" id="work-img" name="work-img" accept="images/*" required> 
   </div>
-  <button type="submit" class="btn btn-dark">Create</button>
+  <button type="submit" class="btn btn-dark">Create</button>  
+  <div id="spinner" class="spinner-grow text-warning d-none" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
 </form>
 
 <script src="/javascript/add-post.js"></script>

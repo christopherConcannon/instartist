@@ -6,6 +6,7 @@ const imgUpload = require('../../config/imgUpload');
 // POST /api/posts
 // router.post('/', withAuth, (req, res) => {
 router.post('/', withAuth, imgUpload.single('work-img'), (req, res) => {
+  
 	console.log(req.file);
 	console.log(req.body);
 	Post.create({
@@ -47,7 +48,7 @@ router.put('/:id', withAuth, imgUpload.single('work-img'), (req, res) => {
 			res.json(dbPostData);
 		})
 		.catch((err) => {
-			console.log(err);
+      console.log(err);
 			res.status(500).json(err);
 		});
 });
