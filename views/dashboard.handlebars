@@ -18,15 +18,9 @@
       </div>
       <div class="col-md-8">
         <div class="card-body">
-          {{!-- User Name --}}
-          <h5 class="card-title">Username</h5>
-          {{!-- how to access user info from Post query? --}}
           <h5 class="card-title">{{username}}</h5>
           {{!-- description --}}
           <p class="card-text">What Inspires You?</p>
-          {{!-- User Interaction  --}}
-          {{!-- <p class="card-text"><small class="text-muted">Followers: Number Upvotes: Number</small></p> --}}
-          {{!-- <button type="button" class="btn btn-primary">Upload Work</button> --}}
           <a href="/dashboard/new" class="btn btn-dark">Upload Work</a>
         </div>
       </div>
@@ -49,7 +43,15 @@
             <img class="img-fluid img-thumbnail" src="{{img_url}}" alt="">
           </a>
         </div>
-      
+    
+      {{/each}}
+    </div>{{!-- /.row --}}
+  </div>{{!-- /.container --}}
+{{/if}}
+
+
+{{!-- HARDCODED IMAGES FOR TESTING PURPOSES --}}
+
       {{!-- <div class="col-lg-3 col-md-4 col-6">
         <a href="#" class="d-block mb-4 h-100">
               <img class="img-fluid img-thumbnail" src="https://source.unsplash.com/aob0ukAYfuI/400x300" alt="">
@@ -111,7 +113,3 @@
               <img class="img-fluid img-thumbnail" src="https://source.unsplash.com/p2TQ-3Bh3Oo/400x300" alt="">
             </a>
       </div> --}}
-      {{/each}}
-    </div>{{!-- /.row --}}
-  </div>{{!-- /.container --}}
-{{/if}}
