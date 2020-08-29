@@ -35,7 +35,8 @@ router.get('/', withAuth, (req, res) => {
       
 			// render template and pass through db data
 			res.render('dashboard', {
-				posts,
+        posts,
+        username: req.session.username,
 				loggedIn : true
 			});
 		})
