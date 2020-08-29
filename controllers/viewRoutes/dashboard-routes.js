@@ -98,7 +98,9 @@ router.get('/edit/:id', withAuth, (req, res) => {
 
 // GET /dashboard/new
 router.get('/new', withAuth, (req, res) => {
-	res.render('add-post', {});
+	res.render('add-post', {
+    loggedIn : true
+  });
 });
 
 // GET /dashboard/edit/1

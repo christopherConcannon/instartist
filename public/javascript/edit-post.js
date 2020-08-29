@@ -9,6 +9,9 @@ async function editFormHandler(event) {
 
   const formData = new FormData(form);
 
+  const spinner = document.querySelector('#spinner');
+	spinner.classList.remove('d-none');
+
 	const response = await fetch(`/api/posts/${id}`, {
 		method  : 'PUT',
     body: formData
@@ -19,7 +22,8 @@ async function editFormHandler(event) {
 		// document.location.replace('/');
 	} else {
 		alert(response.statusText);
-	}
+  }
+  spinner.classList.add('d-none');
 }
 
 document.querySelector('#edit-post-form').addEventListener('submit', editFormHandler);
