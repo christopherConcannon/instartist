@@ -62,8 +62,10 @@ router.post('/', (req, res) => {
 		req.session.save(() => {
 			req.session.user_id = dbUserData.id;
 			req.session.username = dbUserData.username;
+			req.session.bio = dbUserData.bio;
+			req.session.medium = dbUserData.medium;
+			req.session.interests = dbUserData.interests;
 			req.session.loggedIn = true;
-
 			res.json(dbUserData);
 		});
 	});
@@ -140,8 +142,11 @@ router.post('/login', (req, res) => {
 		// initiate creation of session and grab values for session variables from db
 		req.session.save(() => {
 			// declare session variables
-			req.session.user_id = dbUserData.id;
+      req.session.user_id = dbUserData.id;
 			req.session.username = dbUserData.username;
+			req.session.bio = dbUserData.bio;
+			req.session.medium = dbUserData.medium;
+			req.session.interests = dbUserData.interests;
 			req.session.loggedIn = true;
 
 			res.json({ user: dbUserData, message: 'You are now logged in!' });

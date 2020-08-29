@@ -31,12 +31,19 @@ router.get('/', withAuth, (req, res) => {
 			// serialize data before passing to template
       const posts = dbPostData.map((post) => post.get({ plain: true }));
 
-      console.log(posts);
+      // console.log(posts);
+      const userMeta = {
+        username: req.session.username,
+        bio: req.session.bio,
+        medium: req.session.medium,
+        interests: req.session.interests
+      }
       
 			// render template and pass through db data
 			res.render('dashboard', {
         posts,
-        username: req.session.username,
+        userMeta,
+        // username: req.session.username,
 				loggedIn : true
 			});
 		})
