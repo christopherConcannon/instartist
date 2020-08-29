@@ -1,15 +1,30 @@
 <form id="new-post-form" class="card">
-  <div class="card-header"><h3>Create New Post</h3></div>
+  <div class="card-header">
+    <h3>Create New Post</h3>
+  </div>
   <div class="card-body">
     <div>
       <label for="post-title">Title</label>
       <input type="text" name="post-title" id="post-title" class="w-100 p-3 post-title">
     </div>
     <div>
-      <label for="post-content">Content</label>
-      <textarea name="post-content" id="post-content" rows="10" class="w-100 p-3 post-content"></textarea>
+      <label for="post-image">Image</label>
+      <button type="button" class="btn btn-primary" id="button">Search</button>
     </div>
-    <button type="submit" class="btn">Create</button>
+    <div>
+      <label for="post-content">Dimension</label>
+      <textarea name="post-dimension" id="post-dimension" rows="2" class="w-100 p-3 post-dimension"></textarea>
+    </div>
+    <div>
+      <label for="post-content">Description</label>
+      <textarea name="post-description" id="post-description" rows="2"
+        class="w-100 p-3 post-description">{{posts.description}}</textarea>
+    </div>
+    <div>
+      <label for="post-content">Media</label>
+      <textarea name="post-media" id="post-media" rows="2" class="w-100 p-3 post-media"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Create</button>
   </div>
 </form>
 <script src="/javascript/add-post.js"></script>
