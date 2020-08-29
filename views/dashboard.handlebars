@@ -10,47 +10,48 @@
 {{/if}} --}}
 
 
-  <div class="card mb-12" style="fluid-width: 540px;">
-    <div class="row no-gutters">
-      <div class="col-md-4">
-        {{!-- User Image/Maybe Random Image of Art --}}
-        <img src="https://source.unsplash.com/pWkk7iiCoDM/400x300" class="card-img" alt="">
-      </div>
-      <div class="col-md-8">
-        <div class="card-body">
-          {{!-- User Name --}}
-          <h5 class="card-title">Username</h5>
-          {{!-- how to access user info from Post query? --}}
-          <h5 class="card-title">{{username}}</h5>
-          {{!-- description --}}
-          <p class="card-text">What Inspires You?</p>
-          {{!-- User Interaction  --}}
-          {{!-- <p class="card-text"><small class="text-muted">Followers: Number Upvotes: Number</small></p> --}}
-          {{!-- <button type="button" class="btn btn-primary">Upload Work</button> --}}
-          <a href="/dashboard/new" class="btn btn-dark">Upload Work</a>
-        </div>
+<div class="card mb-12" style="fluid-width: 540px;">
+  <div class="row no-gutters">
+    <div class="col-md-4">
+      {{!-- User Image/Maybe Random Image of Art --}}
+      <img src="https://source.unsplash.com/pWkk7iiCoDM/400x300" class="card-img" alt="">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        {{!-- User Name --}}
+        <h5 class="card-title">Username</h5>
+        {{!-- how to access user info from Post query? --}}
+        <h5 class="card-title">{{username}}</h5>
+        {{!-- description --}}
+        <p class="card-text">What Inspires You?</p>
+        {{!-- User Interaction  --}}
+        {{!-- <p class="card-text"><small class="text-muted">Followers: Number Upvotes: Number</small></p> --}}
+        {{!-- <button type="button" class="btn btn-primary">Upload Work</button> --}}
+        <a href="/dashboard/new" class="btn btn-dark btn-sm ">Upload Work</a>
+        <a href="/dashboard/edit-user" class="btn btn-dark btn-sm ">Update User</a>
       </div>
     </div>
   </div>
+</div>
 
 {{#if posts.length}}
-  <div class="container">
+<div class="container">
 
-    <h1 class="font-weight-light text-center text-lg-left mt-4 mb-0">Your Work</h1>
+  <h1 class="font-weight-light text-center text-lg-left mt-4 mb-0">Your Work</h1>
 
-    <hr class="mt-2 mb-5">
+  <hr class="mt-2 mb-5">
 
-    <div class="row text-center text-lg-left">
-    
-      {{#each posts}} 
+  <div class="row text-center text-lg-left">
 
-        <div class="col-lg-3 col-md-4 col-6">
-          <a href="/dashboard/edit/{{id}}" class="d-block mb-4 h-100">
-            <img class="img-fluid img-thumbnail" src="{{img_url}}" alt="">
-          </a>
-        </div>
-      
-      {{!-- <div class="col-lg-3 col-md-4 col-6">
+    {{#each posts}}
+
+    <div class="col-lg-3 col-md-4 col-6">
+      <a href="/dashboard/edit/{{id}}" class="d-block mb-4 h-100">
+        <img class="img-fluid img-thumbnail" src="{{img_url}}" alt="">
+      </a>
+    </div>
+
+    {{!-- <div class="col-lg-3 col-md-4 col-6">
         <a href="#" class="d-block mb-4 h-100">
               <img class="img-fluid img-thumbnail" src="https://source.unsplash.com/aob0ukAYfuI/400x300" alt="">
             </a>
@@ -111,7 +112,7 @@
               <img class="img-fluid img-thumbnail" src="https://source.unsplash.com/p2TQ-3Bh3Oo/400x300" alt="">
             </a>
       </div> --}}
-      {{/each}}
-    </div>{{!-- /.row --}}
-  </div>{{!-- /.container --}}
+    {{/each}}
+  </div>{{!-- /.row --}}
+</div>{{!-- /.container --}}
 {{/if}}
