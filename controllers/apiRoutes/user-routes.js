@@ -65,7 +65,9 @@ router.post('/', (req, res) => {
 			req.session.bio = dbUserData.bio;
 			req.session.medium = dbUserData.medium;
 			req.session.interests = dbUserData.interests;
-			req.session.loggedIn = true;
+      req.session.loggedIn = true;
+      
+      req.flash('success', `Hi ${req.session.username}, welcome to Instartist!`);
 			res.json(dbUserData);
 		});
 	});
@@ -149,6 +151,7 @@ router.post('/login', (req, res) => {
 			req.session.interests = dbUserData.interests;
 			req.session.loggedIn = true;
 
+      req.flash('success', 'You are now logged in!');
 			res.json({ user: dbUserData, message: 'You are now logged in!' });
 		});
 	});
@@ -157,7 +160,12 @@ router.post('/login', (req, res) => {
 // POST /api/users/logout
 // logout -- if user is loggedIn, destroy session variables and reset cookie to clear session, then send res back to client so it can redirect user to homepage
 router.post('/logout', (req, res) => {
+
 	if (req.session.loggedIn) {
+    // DOESN'T WORK BECAUSE SESSION GETS DESTROYED.  IS THERE ANOTHER WAY TO LOG OUT USER WITHOUT DESTROYING SESSION?
+    // req.flash('success', 'You have logged out!');
+    req.flash('success', 'You have logged out!');
+    res.redirect('/');
 		req.session.destroy(() => {
 			res.status(204).end();
 		});

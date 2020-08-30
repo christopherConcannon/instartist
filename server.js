@@ -32,7 +32,8 @@ app.use(flash());
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 app.use((req, res, next) => {
-  res.locals.message =  req.flash('error');
+  res.locals.error =  req.flash('error');
+  res.locals.success = req.flash('success');
   next();
 })
 app.use(routes);

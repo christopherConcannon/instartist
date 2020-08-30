@@ -3,7 +3,7 @@ const { Comment } = require('../../models');
 const withAuth = require('../../utils/auth');
 
 // GET /api/comments
-router.get('/', (req, res) => {
+router.get('/', withAuth, (req, res) => {
 	Comment.findAll({
 		attributes : [ 'id', 'comment_text', 'user_id', 'post_id' ]
 	})
