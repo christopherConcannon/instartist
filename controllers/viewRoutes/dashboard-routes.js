@@ -36,7 +36,8 @@ router.get('/', withAuth, (req, res) => {
 			// render template and pass through db data
 			res.render('dashboard', {
         posts,
-        username: req.session.username,
+		username: req.session.username,
+		user_id:req.session.user_id,
 				loggedIn : true
 			});
 		})
@@ -178,6 +179,39 @@ router.get('/user/:id',withAuth, (req, res)=>{
 	
 })
 
+
+
+// DELETE /api/users/1
+router.delete('/user/:id', withAuth, (req, res) => {
+	Post.destroy({   //delete post when delete a user
+		where:{
+			user_id:req.params.id
+		}
+		
+	})
+	Comment.destroy({
+		where : {
+			user_id : req.params.id
+		}
+	}).then(() => {
+		User.destroy({
+			where : {
+				id : req.params.id
+			}
+		})
+			.then((dbUserData) => {
+				if (!dbUserData) {
+					res.status(404).json({ message: 'No user found with this id' });
+					return;
+				}
+				res.json(dbUserData);
+			})
+			.catch((err) => {
+				console.log(err);
+				res.status(500).json(err);
+			});
+	});
+});
 
 module.exports = router;
 
