@@ -7,7 +7,7 @@ const imgUpload = require('../../config/imgUpload');
 // router.post('/', withAuth, (req, res) => {
 router.post('/', withAuth, imgUpload.single('work-img'), (req, res) => {
   
-	console.log(req.file);
+  console.log(req.file);
 	console.log(req.body);
 	Post.create({
 		title       : req.body.title,

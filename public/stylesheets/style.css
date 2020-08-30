@@ -1,5 +1,10 @@
 .img-thumbnail {
   border: none;
+  height: 300px;
+}
+
+.single-post-img {
+  height: 800px;
 }
 
 
