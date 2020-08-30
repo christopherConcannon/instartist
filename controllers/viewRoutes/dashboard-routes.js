@@ -137,5 +137,47 @@ router.get('/edit/:id', withAuth, (req, res) => {
 		});
 }); 
 
+router.get('/user/:id',withAuth, (req, res)=>{	
+	User.findOne({
+		where      : {
+			id : req.params.id
+		},
+		include    : [
+			{
+				model      : Post,
+				attributes : [ 'id', 'title','dimension','description','media','img_url', 'created_at' ],
+			},
+			{
+				model      : Comment,
+				attributes : [ 'id', 'comment_text', 'created_at' ],
+				include    : {
+					model      : Post,
+					attributes : [ 'title' ]
+				}
+			}
+		]
+	})
+		.then((dbUserData) => {
+			if (!dbUserData) {
+				res.status(404).json({ message: 'No user found with this id' });
+				return;
+			}
+			const user = dbUserData.get({ plain: true });
+			console.log("user datos",user)
+			// pass data to template
+			res.render('edit-user', {
+				user,
+				loggedIn : true
+			});
+		})
+
+		.catch((err) => {
+			console.log(err);
+			res.status(500).json(err);
+		});	
+	
+})
+
+
 module.exports = router;
 

@@ -6,32 +6,32 @@
 
     <div class="form-group">
       <label for="username-signup">Username</label>
-      <input type="text" class="form-control" id="username-update" value="">
+      <input type="text" class="form-control" id="username-update" value="{{user.username}}">
     </div>
     <div class="form-group">
       <label for="email-signup">Email address</label>
-      <input type="email" class="form-control" id="email-update" aria-describedby="emailHelp" value="">
+      <input type="email" class="form-control" id="email-update" aria-describedby="emailHelp" value="{{user.email}}">
       <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
     </div>
     <div class="form-group">
       <label for="password-signup">Password</label>
-      <input type="password" class="form-control" id="password-update" value="">
+      <input type="password" class="form-control" id="password-update" value="{{user.password}}">
     </div>
     <div class="form-group">
       <label for="bio">Short Bio</label>
-      <input type="text" class="form-control" id="bio" value="">
+      <input type="text" class="form-control" id="bio" value="{{user.bio}}">
     </div>
     <div class="form-group">
       <label for="medium">Preferred Medium</label>
-      <input type="text" class="form-control" id="medium" value=""> 
+      <input type="text" class="form-control" id="medium" value="{{user.medium}}"> 
     </div>
     <div class="form-group">
       <label for="interests">Interests</label>
-      <input type="text" class="form-control" id="interests" value="">
+      <input type="text" class="form-control" id="interests" value="{{user.interests}}">
     </div>
   </div>
   <button type="submit" class="btn btn-primary " id="update">Update!</button>
-  <button type="submit" class="btn btn-danger" id="delete">Delete User</button>
+  <button type="button" class="btn btn-danger" id="delete">Delete User</button>
 </form>
 <script src="/javascript/edit-user.js"></script>
 <!--<script src="/javascript/delete-post.js"></script>-->

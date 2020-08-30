@@ -15,7 +15,7 @@ router.get('/', (req, res) => {
 });
 
 // GET /api/users/1
-router.get('/:id', (req, res) => {
+/*router.get('/:id', (req, res) => {
 	User.findOne({
 		attributes : { exclude: [ 'password' ] },
 		where      : {
@@ -24,7 +24,7 @@ router.get('/:id', (req, res) => {
 		include    : [
 			{
 				model      : Post,
-				attributes : [ 'id', 'title', 'content', 'created_at' ]
+				attributes : [ 'id', 'title','dimension','description','media','img_url', 'created_at' ],
 			},
 			{
 				model      : Comment,
@@ -47,7 +47,7 @@ router.get('/:id', (req, res) => {
 			console.log(err);
 			res.status(500).json(err);
 		});
-});
+});*/
 
 // POST /api/users -- create user on signup
 router.post('/', (req, res) => {
@@ -92,6 +92,12 @@ router.put('/:id', withAuth, (req, res) => {
 
 // DELETE /api/users/1
 router.delete('/:id', withAuth, (req, res) => {
+	Post.destroy({   //delete post when delete a user
+		where:{
+			user_id:req.params.id
+		}
+		
+	})
 	Comment.destroy({
 		where : {
 			user_id : req.params.id
