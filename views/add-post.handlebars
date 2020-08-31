@@ -1,15 +1,42 @@
-<form id="new-post-form" class="card">
-  <div class="card-header"><h3>Create New Post</h3></div>
-  <div class="card-body">
-    <div>
-      <label for="post-title">Title</label>
-      <input type="text" name="post-title" id="post-title" class="w-100 p-3 post-title">
-    </div>
-    <div>
-      <label for="post-content">Content</label>
-      <textarea name="post-content" id="post-content" rows="10" class="w-100 p-3 post-content"></textarea>
-    </div>
-    <button type="submit" class="btn">Create</button>
+{{!-- THIS WORKS TO UPLOAD IMAGE TO CLOUDINARY AND ACCESS REQ.FILE FROM ROUTE  --}}
+{{!-- <form action="/api/posts" method="post" enctype="multipart/form-data">
+  <div class="form-group">
+    <label for="work-img">Example file input</label>
+    <input type="file" class="form-control-file" id="work-img" name="work-img">
   </div>
-</form>
+  <button type="submit" class="btn btn-primary">Create</button>
+</form> --}}
+
+<div class="container">
+  <form id="new-post-form">
+    <div class="form-group">
+      <label for="title">Title of work</label>
+      <input type="text" class="form-control" id="title" name="title">
+    </div>
+    <div class="form-group">
+      <label for="dimensions">Dimensions of work</label>
+      <input type="text" class="form-control" id="dimensions" name="dimensions">
+    </div>
+    <div class="form-group">
+      <label for="description">Description of work / Artist statement</label>
+      <input type="text" class="form-control" id="description" name="description">
+    </div>
+    <div class="form-group">
+      <label for="media">Media</label>
+      <input type="text" class="form-control" id="media" name="media">
+    </div>
+    <div class="form-group">
+      <label for="work-img">JPG or PDF</label>
+      <input type="file" class="form-control-file" id="work-img" name="work-img" accept="images/*" required> 
+    </div>
+    <button type="submit" class="btn btn-dark">Create</button>  
+    <div id="spinner" class="spinner-grow text-warning d-none" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+  </form>
+</div>
+
 <script src="/javascript/add-post.js"></script>
+
+
+

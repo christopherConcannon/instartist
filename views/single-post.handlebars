@@ -6,12 +6,12 @@
 
 {{!-- only display form if user logged in --}}
 {{#if loggedIn}}
-  <form id="comment-form" class="card">
-    <div class="card-header"></div>
+  <form id="comment-form" class="card mt-5">
+    <div class="card-header bg-dark"></div>
     <div class="card-body">
       <label for="comment-body">Comment</label>
-      <textarea name="comment-body" class="w-100 p-3" rows="10"></textarea>
-      <button type="submit" class="btn">Submit!</button>
+      <textarea name="comment-body" class="w-100 p-3" rows="3"></textarea>
+      <button type="submit" class="btn btn-dark">Submit!</button>
     </div>
   </form>
 {{/if}}
