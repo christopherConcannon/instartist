@@ -1,17 +1,40 @@
 <form id="edit-post-form" class="card">
-  <div class="card-header"><h3>Edit Post</h3></div>
+  <div class="card-header bg-dark text-light"><h3>Edit Post</h3></div>
   <div class="card-body">
-    <div>
-      <label for="post-title">Title</label>
-      <input type="text" name="post-title" id="post-title" class="w-100 p-3 post-title" value="{{post.title}}">
+    
+    {{!-- <div class="col-lg-3 col-md-4 col-6">
+            <a href="/dashboard/edit/{{id}}" class="d-block mb-4 h-100">
+              <img class="img-fluid img-thumbnail" src="{{img_url}}" alt="">
+            </a>
+          </div> --}}
+
+    <div class="form-group">
+      <label for="title">Title of work</label>
+      <input type="text" class="form-control" id="title" name="title" value="{{post.title}}">
     </div>
-    <div>
-      <label for="post-content">Content</label>
-      <textarea name="post-content" id="post-content" rows="10" class="w-100 p-3 post-content">{{!post.content}}</textarea>
+    <div class="form-group">
+      <label for="dimensions">Dimensions of work</label>
+      <input type="text" class="form-control" id="dimensions" name="dimensions"  value="{{post.dimension}}">
     </div>
-    <button type="submit" class="btn">Update Post</button>
-    <button type="button" id="delete-post-btn" class="btn">Delete</button>
-  </div>
+    <div class="form-group">
+      <label for="description">Description of work / Artist statement</label>
+      <input type="text" class="form-control" id="description" name="description"  value="{{post.description}}">
+    </div>
+    <div class="form-group">
+      <label for="media">Media</label>
+      <input type="text" class="form-control" id="media" name="media"  value="{{post.media}}">
+    </div>
+    <div class="form-group">
+      <label for="work-img">Example file input</label>
+      {{!-- QUESTION -- is it possible to populate file input with previously chosen img? --}}
+      <input type="file" class="form-control-file" id="work-img" name="work-img" accept="images/*">
+    </div>
+    <button type="submit" class="btn btn-dark">Update Work</button>
+    <button type="button" id="delete-post-btn" class="btn btn-danger">Delete Work</button>
+    <div id="spinner" class="spinner-grow text-warning d-none" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+  </div>{{!-- /.card-body --}}
 </form>
 <script src="/javascript/edit-post.js"></script>
 <script src="/javascript/delete-post.js"></script>

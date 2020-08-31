@@ -1,16 +1,21 @@
 const router = require('express').Router();
 const { Post, User, Comment } = require('../../models');
 const withAuth = require('../../utils/auth');
+const imgUpload = require('../../config/imgUpload');
 
 // POST /api/posts
-router.post('/', withAuth, (req, res) => {
+// router.post('/', withAuth, (req, res) => {
+router.post('/', withAuth, imgUpload.single('work-img'), (req, res) => {
+  
+	console.log(req.file);
+	console.log(req.body);
 	Post.create({
-		title: req.body.title,		
-		upload_img:req.body.upload_img,		
-		dimension:req.body.dimension,
-		description:req.body.description,
-		media:req.body.media,		
-		user_id : req.session.user_id
+		title       : req.body.title,
+		dimension   : req.body.dimensions,
+		description : req.body.description,
+		media       : req.body.media,
+		img_url     : req.file.path,
+		user_id     : req.session.user_id
 	})
 		.then((dbPostData) => res.json(dbPostData))
 		.catch((err) => {
@@ -20,11 +25,14 @@ router.post('/', withAuth, (req, res) => {
 });
 
 // PUT /api/posts/1
-router.put('/:id', (req, res) => {
+router.put('/:id', withAuth, imgUpload.single('work-img'), (req, res) => {
 	Post.update(
 		{
-			title   : req.body.title,
-			//content : req.body.content
+			title       : req.body.title,
+			dimension   : req.body.dimensions,
+			description : req.body.description,
+			media       : req.body.media,
+			img_url     : req.file.path
 		},
 		{
 			where : {
@@ -40,13 +48,18 @@ router.put('/:id', (req, res) => {
 			res.json(dbPostData);
 		})
 		.catch((err) => {
-			console.log(err);
+      console.log(err);
 			res.status(500).json(err);
 		});
 });
 
 // DELETE /api/posts/1
 router.delete('/:id', withAuth, (req, res) => {
+	Comment.destroy({
+		where : {
+			post_id : req.params.id
+		}
+	}).then(() => {
 	Post.destroy({
 		where : {
 			id : req.params.id
@@ -63,6 +76,7 @@ router.delete('/:id', withAuth, (req, res) => {
 			console.log(err);
 			res.status(500).json(err);
 		});
+});
 });
 
 module.exports = router;

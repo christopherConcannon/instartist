@@ -50,7 +50,25 @@ router.get('/:id', (req, res) => {
 });
 
 // POST /api/users -- create user on signup
-router.post('/', (req, res) => {
+// router.post('/', (req, res) => {
+// 	User.create({
+// 		username : req.body.username,
+// 		email : req.body.email,
+// 		password : req.body.password
+// 	}).then((dbUserData) => {
+// 		req.session.save(() => {
+// 			req.session.user_id = dbUserData.id;
+// 			req.session.username = dbUserData.username;
+// 			req.session.bio = dbUserData.bio;
+// 			req.session.medium = dbUserData.medium;
+// 			req.session.interests = dbUserData.interests;
+// 			req.session.loggedIn = true;
+// 			res.json(dbUserData);
+// 		});
+// 	});
+// });
+
+router.post('/', withAuth, imgUpload.single('work-img'), (req, res) => {
 	User.create({
 		username : req.body.username,
 		email : req.body.email,
@@ -59,11 +77,23 @@ router.post('/', (req, res) => {
 		req.session.save(() => {
 			req.session.user_id = dbUserData.id;
 			req.session.username = dbUserData.username;
+			req.session.bio = dbUserData.bio;
+			req.session.medium = dbUserData.medium;
+			req.session.interests = dbUserData.interests;
 			req.session.loggedIn = true;
-
 			res.json(dbUserData);
 		});
 	});
+
+	Post.create
+	.then((dbPostData) => res.json(dbPostData))
+	.catch((err) => {
+		console.log(err);
+		res.status(500).json(err);
+	});
+
+	console.log(req.file);
+	console.log(req.body);
 });
 
 // PUT /api/users/1
@@ -137,8 +167,11 @@ router.post('/login', (req, res) => {
 		// initiate creation of session and grab values for session variables from db
 		req.session.save(() => {
 			// declare session variables
-			req.session.user_id = dbUserData.id;
+      req.session.user_id = dbUserData.id;
 			req.session.username = dbUserData.username;
+			req.session.bio = dbUserData.bio;
+			req.session.medium = dbUserData.medium;
+			req.session.interests = dbUserData.interests;
 			req.session.loggedIn = true;
 
 			res.json({ user: dbUserData, message: 'You are now logged in!' });

@@ -10,7 +10,7 @@ router.get('/', withAuth, (req, res) => {
 			// use the ID from the session
 			user_id : req.session.user_id
 		},
-		// attributes : [ 'id', 'title', 'artist_name','upload_img','biography','dimension','description','media','interest','preferred_media','created_at' ],
+		attributes : [ 'id', 'title','dimension','description','media','img_url', 'created_at' ],
 		order      : [ [ 'created_at', 'DESC' ] ],
 		include    : [
 			{
@@ -23,18 +23,27 @@ router.get('/', withAuth, (req, res) => {
 			},
 			{
 				model      : User,
-				attributes : [ 'username' ]
+				attributes : [ 'username', 'bio', 'medium', 'interests' ]
 			}
 		]
 	})
 		.then((dbPostData) => {
 			// serialize data before passing to template
       const posts = dbPostData.map((post) => post.get({ plain: true }));
+
+      // console.log(posts);
+      const userMeta = {
+        username: req.session.username,
+        bio: req.session.bio,
+        medium: req.session.medium,
+        interests: req.session.interests
+      }
       
 			// render template and pass through db data
 			res.render('dashboard', {
-				// layout   : 'dashboard',
-				posts,
+        	posts,
+        	userMeta,
+        	// username: req.session.username,
 				loggedIn : true
 			});
 		})
@@ -50,7 +59,7 @@ router.get('/edit/:id', withAuth, (req, res) => {
 		where      : {
 			id : req.params.id
 		},
-		// attributes :  [ 'id', 'title', 'artist_name','upload_img','biography','dimension','description','media','interest','preferred_media','created_at' ],
+		attributes :  [ 'id', 'title','dimension','description','media','img_url', 'created_at' ],
 		include    : [
 			{
 				model      : Comment,
@@ -90,8 +99,8 @@ router.get('/edit/:id', withAuth, (req, res) => {
 // GET /dashboard/new
 router.get('/new', withAuth, (req, res) => {
 	res.render('add-post', {
-		layout : 'dashboard'
-	});
+    loggedIn : true
+  });
 });
 
 // GET /dashboard/edit/1
