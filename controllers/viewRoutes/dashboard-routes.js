@@ -139,6 +139,7 @@ router.get('/edit/:id', withAuth, (req, res) => {
 }); 
 
 router.get('/user/:id',withAuth, (req, res)=>{	
+	console.log(req.params.id)
 	User.findOne({
 		where      : {
 			id : req.params.id

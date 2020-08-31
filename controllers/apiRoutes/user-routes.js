@@ -70,9 +70,9 @@ router.post('/', (req, res) => {
 });
 
 // PUT /api/users/1
-router.put('/:id', withAuth, (req, res) => {
+router.put('/:id', withAuth, (req, res) => {	
 	User.update(req.body, {
-		individualHooks : true,
+		individualHooks : false,
 		where           : {
 			id : req.params.id
 		}
