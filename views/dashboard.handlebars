@@ -18,33 +18,33 @@
             <p class="card-text">Interests: {{userMeta.interests}}</p>
           {{/if}}
           <a href="/dashboard/new" class="btn btn-dark">Upload Work</a>
-          <a href="/dashboard/user/{{user_id}}" class="btn btn-dark btn-sm ">Update User</a>
+          <a href="/dashboard/user/{{user_id}}" class="btn btn-primary">Update User</a>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-  {{#if posts.length}}
+{{#if posts.length}}
 
-      <h1 class="font-weight-light text-center text-lg-left mt-4 mb-0">Your Work</h1>
+  <h1 class="font-weight-light text-center text-lg-left mt-4 mb-0">Your Work</h1>
 
-      <hr class="mt-2 mb-5">
+    <hr class="mt-2 mb-5">
 
-      <div class="row text-center text-lg-left">
-      
-        {{#each posts}} 
+    <div class="row text-center text-lg-left">
+    
+      {{#each posts}} 
 
-          <div class="col-lg-3 col-md-4 col-6">
-            <a href="/dashboard/edit/{{id}}" class="d-block mb-4 h-100">
-              <img class="img-fluid img-thumbnail" src="{{img_url}}" alt="">
-            </a>
-          </div>
-      
-        {{/each}}
-      </div>{{!-- /.row --}}
-    </div>{{!-- /.container --}}
-  {{/if}}
+        <div class="col-lg-3 col-md-4 col-6">
+          <a href="/dashboard/edit/{{id}}" class="d-block mb-4 h-100">
+            <img class="img-fluid img-thumbnail" src="{{img_url}}" alt="">
+          </a>
+        </div>
+    
+      {{/each}}
+    </div>{{!-- /.row --}}
+  </div>{{!-- /.container --}}
+{{/if}}
 
 
 

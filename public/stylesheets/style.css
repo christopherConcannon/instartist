@@ -8,6 +8,17 @@
 }
 
 
+/* spinner */
+/* .spinner-wrapper {
+  height: 100vh;
+} */
+
+#spinner {
+  width: 5rem;
+  height: 5rem;
+}
+
+
 /* getting footer to stay at bottom */
 .flex-column {
 	display: flex;

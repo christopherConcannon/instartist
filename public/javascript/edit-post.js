@@ -3,18 +3,22 @@ async function editFormHandler(event) {
 
 	const id = window.location.toString().split('/')[
 		window.location.toString().split('/').length - 1
-  ];
-  
-  const form = document.querySelector('#edit-post-form');
+	];
 
-  const formData = new FormData(form);
+	const form = document.querySelector('#edit-post-form');
 
-  const spinner = document.querySelector('#spinner');
+	const formData = new FormData(form);
+
+	const spinnerWrapper = document.querySelector('.spinner-wrapper');
+	const spinner = document.querySelector('#spinner');
+
+	form.classList.add('d-none');
+	spinnerWrapper.classList.replace('d-none', 'd-flex');
 	spinner.classList.remove('d-none');
 
 	const response = await fetch(`/api/posts/${id}`, {
-		method  : 'PUT',
-    body: formData
+		method : 'PUT',
+		body   : formData
 	});
 
 	if (response.ok) {
@@ -23,7 +27,10 @@ async function editFormHandler(event) {
 	} else {
 		alert(response.statusText);
   }
-  spinner.classList.add('d-none');
+  
+	spinnerWrapper.classList.add('d-none');
+	spinner.classList.add('d-none');
+	form.classList.remove('d-none');
 }
 
 document.querySelector('#edit-post-form').addEventListener('submit', editFormHandler);

@@ -75,17 +75,24 @@ router.post('/', (req, res) => {
 
 // PUT /api/users/1
 router.put('/:id', withAuth, (req, res) => {	
-	User.update(req.body, {
-		individualHooks : false,
+	User.update(
+    {
+      bio: req.body.bio,
+      medium: req.body.medium,
+      interests: req.body.interests
+    }, 
+    {
+		// individualHooks : false,
 		where           : {
 			id : req.params.id
 		}
 	})
 		.then((dbUserData) => {
-			if (!dbUserData[0]) {
+			if (!dbUserData) {
 				res.status(404).json({ message: 'No user found with this id' });
 				return;
-			}
+      }
+      req.flash('success', 'Your user info has been updated!');
 			res.json(dbUserData);
 		})
 		.catch((err) => {
@@ -93,14 +100,33 @@ router.put('/:id', withAuth, (req, res) => {
 			res.status(500).json(err);
 		});
 });
+// // PUT /api/users/1
+// router.put('/:id', withAuth, (req, res) => {	
+// 	User.update(req.body, {
+// 		individualHooks : false,
+// 		where           : {
+// 			id : req.params.id
+// 		}
+// 	})
+// 		.then((dbUserData) => {
+// 			if (!dbUserData[0]) {
+// 				res.status(404).json({ message: 'No user found with this id' });
+// 				return;
+// 			}
+// 			res.json(dbUserData);
+// 		})
+// 		.catch((err) => {
+// 			console.log(err);
+// 			res.status(500).json(err);
+// 		});
+// });
 
 // DELETE /api/users/1
 router.delete('/:id', withAuth, (req, res) => {
 	Post.destroy({   //delete post when delete a user
 		where:{
-			user_id:req.params.id
+			user_id: req.params.id
 		}
-		
 	})
 	Comment.destroy({
 		where : {
