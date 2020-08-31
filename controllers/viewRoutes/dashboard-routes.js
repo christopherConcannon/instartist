@@ -42,8 +42,9 @@ router.get('/', withAuth, (req, res) => {
 			// render template and pass through db data
 			res.render('dashboard', {
         posts,
+		    username: req.session.username,
+		    user_id:req.session.user_id,
         userMeta,
-        // username: req.session.username,
 				loggedIn : true
 			});
 		})
@@ -145,6 +146,82 @@ router.get('/edit/:id', withAuth, (req, res) => {
 			res.status(500).json(err);
 		});
 }); 
+
+router.get('/user/:id',withAuth, (req, res)=>{	
+	console.log(req.params.id)
+	User.findOne({
+		where      : {
+			id : req.params.id
+		},
+		include    : [
+			{
+				model      : Post,
+				attributes : [ 'id', 'title','dimension','description','media','img_url', 'created_at' ],
+			},
+			{
+				model      : Comment,
+				attributes : [ 'id', 'comment_text', 'created_at' ],
+				include    : {
+					model      : Post,
+					attributes : [ 'title' ]
+				}
+			}
+		]
+	})
+		.then((dbUserData) => {
+			if (!dbUserData) {
+				res.status(404).json({ message: 'No user found with this id' });
+				return;
+			}
+			const user = dbUserData.get({ plain: true });
+			console.log("user datos",user)
+			// pass data to template
+			res.render('edit-user', {
+				user,
+				loggedIn : true
+			});
+		})
+
+		.catch((err) => {
+			console.log(err);
+			res.status(500).json(err);
+		});	
+	
+})
+
+
+
+// DELETE /api/users/1
+router.delete('/user/:id', withAuth, (req, res) => {
+	Post.destroy({   //delete post when delete a user
+		where:{
+			user_id:req.params.id
+		}
+		
+	})
+	Comment.destroy({
+		where : {
+			user_id : req.params.id
+		}
+	}).then(() => {
+		User.destroy({
+			where : {
+				id : req.params.id
+			}
+		})
+			.then((dbUserData) => {
+				if (!dbUserData) {
+					res.status(404).json({ message: 'No user found with this id' });
+					return;
+				}
+				res.json(dbUserData);
+			})
+			.catch((err) => {
+				console.log(err);
+				res.status(500).json(err);
+			});
+	});
+});
 
 module.exports = router;
 

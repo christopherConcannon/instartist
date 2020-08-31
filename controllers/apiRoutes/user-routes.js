@@ -24,7 +24,7 @@ router.get('/:id', (req, res) => {
 		include    : [
 			{
 				model      : Post,
-				attributes : [ 'id', 'title', 'content', 'created_at' ]
+				attributes : [ 'id', 'title','dimension','description','media','img_url', 'created_at' ],
 			},
 			{
 				model      : Comment,
@@ -74,9 +74,9 @@ router.post('/', (req, res) => {
 });
 
 // PUT /api/users/1
-router.put('/:id', withAuth, (req, res) => {
+router.put('/:id', withAuth, (req, res) => {	
 	User.update(req.body, {
-		individualHooks : true,
+		individualHooks : false,
 		where           : {
 			id : req.params.id
 		}
@@ -96,6 +96,12 @@ router.put('/:id', withAuth, (req, res) => {
 
 // DELETE /api/users/1
 router.delete('/:id', withAuth, (req, res) => {
+	Post.destroy({   //delete post when delete a user
+		where:{
+			user_id:req.params.id
+		}
+		
+	})
 	Comment.destroy({
 		where : {
 			user_id : req.params.id
