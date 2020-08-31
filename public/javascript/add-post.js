@@ -24,14 +24,15 @@
 
 // document.querySelector('#new-post-form').addEventListener('submit', newFormHandler);
 
-// NEED TO ESCAPE STRINGS BECAUSE "" MESS UP REQ.BODY
-
 async function newFormHandler(event) {
 	event.preventDefault();
 
 	const form = document.querySelector('#new-post-form');
 
 	const formData = new FormData(form);
+
+	const spinner = document.querySelector('#spinner');
+	spinner.classList.remove('d-none');
 
 	const response = await fetch(`/api/posts`, {
 		method : 'POST',
@@ -44,6 +45,8 @@ async function newFormHandler(event) {
 	} else {
 		alert(response.statusText);
 	}
+
+	spinner.classList.add('d-none');
 }
 
 document.querySelector('#new-post-form').addEventListener('submit', newFormHandler);
