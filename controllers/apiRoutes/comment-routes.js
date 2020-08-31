@@ -3,7 +3,7 @@ const { Comment } = require('../../models');
 const withAuth = require('../../utils/auth');
 
 // GET /api/comments
-router.get('/', (req, res) => {
+router.get('/', withAuth, (req, res) => {
 	Comment.findAll({
 		attributes : [ 'id', 'comment_text', 'user_id', 'post_id' ]
 	})
@@ -24,7 +24,10 @@ router.post('/', withAuth, (req, res) => {
 			// use the id from the session
 			user_id      : req.session.user_id
 		})
-			.then((dbCommentData) => res.json(dbCommentData))
+			.then((dbCommentData) => {
+        req.flash('success', 'Comment added!');
+				res.json(dbCommentData);
+			})
 			.catch((err) => {
 				console.log(err);
 				res.status(400).json(err);
