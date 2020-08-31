@@ -137,6 +137,8 @@ router.post('/login', (req, res) => {
 		const validPassword = dbUserData.checkPassword(req.body.password);
 
 		if (!validPassword) {
+      req.flash('error', 'Incorrect credentials')
+      res.redirect('/login');
 			res.status(400).json({ message: 'Incorrect password!' });
 			return;
 		}
@@ -165,7 +167,6 @@ router.post('/logout', (req, res) => {
     // DOESN'T WORK BECAUSE SESSION GETS DESTROYED.  IS THERE ANOTHER WAY TO LOG OUT USER WITHOUT DESTROYING SESSION?
     // req.flash('success', 'You have logged out!');
     req.flash('success', 'You have logged out!');
-    res.redirect('/');
 		req.session.destroy(() => {
 			res.status(204).end();
 		});
