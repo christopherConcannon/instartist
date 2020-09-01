@@ -24,7 +24,15 @@ router.get('/:id', (req, res) => {
 		include    : [
 			{
 				model      : Post,
-				attributes : [ 'id', 'title','dimension','description','media','img_url', 'created_at' ],
+				attributes : [
+					'id',
+					'title',
+					'dimension',
+					'description',
+					'media',
+					'img_url',
+					'created_at'
+				]
 			},
 			{
 				model      : Comment,
@@ -52,12 +60,12 @@ router.get('/:id', (req, res) => {
 // POST /api/users -- create user on signup
 router.post('/', (req, res) => {
 	User.create({
-		username : req.body.username,	
-    email: req.body.email,
-    password : req.body.password,
-    bio: req.body.bio,
-    medium: req.body.medium,
-    interests: req.body.interests
+		username  : req.body.username,
+		email     : req.body.email,
+		password  : req.body.password,
+		bio       : req.body.bio,
+		medium    : req.body.medium,
+		interests : req.body.interests
 	}).then((dbUserData) => {
 		req.session.save(() => {
 			req.session.user_id = dbUserData.id;
@@ -65,34 +73,35 @@ router.post('/', (req, res) => {
 			req.session.bio = dbUserData.bio;
 			req.session.medium = dbUserData.medium;
 			req.session.interests = dbUserData.interests;
-      req.session.loggedIn = true;
-      
-      req.flash('success', `Hi ${req.session.username}, welcome to Instartist!`);
+			req.session.loggedIn = true;
+
+			req.flash('success', `Hi ${req.session.username}, welcome to Instartist!`);
 			res.json(dbUserData);
 		});
 	});
 });
 
 // PUT /api/users/1
-router.put('/:id', withAuth, (req, res) => {	
+router.put('/:id', withAuth, (req, res) => {
 	User.update(
-    {
-      bio: req.body.bio,
-      medium: req.body.medium,
-      interests: req.body.interests
-    }, 
-    {
-		individualHooks : false,
-		where           : {
-			id : req.params.id
+		{
+			bio       : req.body.bio,
+			medium    : req.body.medium,
+			interests : req.body.interests
+		},
+		{
+			individualHooks : false,
+			where           : {
+				id : req.params.id
+			}
 		}
-	})
+	)
 		.then((dbUserData) => {
 			if (!dbUserData) {
 				res.status(404).json({ message: 'No user found with this id' });
 				return;
-      }
-      req.flash('success', 'Your user info has been updated!');
+			}
+			req.flash('success', 'Your user info has been updated!');
 			res.json(dbUserData);
 		})
 		.catch((err) => {
@@ -101,7 +110,7 @@ router.put('/:id', withAuth, (req, res) => {
 		});
 });
 // // PUT /api/users/1
-// router.put('/:id', withAuth, (req, res) => {	
+// router.put('/:id', withAuth, (req, res) => {
 // 	User.update(req.body, {
 // 		individualHooks : false,
 // 		where           : {
@@ -123,32 +132,34 @@ router.put('/:id', withAuth, (req, res) => {
 
 // DELETE /api/users/1
 router.delete('/:id', withAuth, (req, res) => {
-	Post.destroy({   //delete post when delete a user
-		where:{
-			user_id: req.params.id
-		}
-	})
-	Comment.destroy({
+	Post.destroy({
+		//delete post when delete a user
 		where : {
 			user_id : req.params.id
 		}
 	}).then(() => {
-		User.destroy({
+		Comment.destroy({
 			where : {
-				id : req.params.id
+				user_id : req.params.id
 			}
-		})
-			.then((dbUserData) => {
-				if (!dbUserData) {
-					res.status(404).json({ message: 'No user found with this id' });
-					return;
+		}).then(() => {
+			User.destroy({
+				where : {
+					id : req.params.id
 				}
-				res.json(dbUserData);
 			})
-			.catch((err) => {
-				console.log(err);
-				res.status(500).json(err);
-			});
+				.then((dbUserData) => {
+					if (!dbUserData) {
+						res.status(404).json({ message: 'No user found with this id' });
+						return;
+					}
+					res.json(dbUserData);
+				})
+				.catch((err) => {
+					console.log(err);
+					res.status(500).json(err);
+				});
+		});
 	});
 });
 
@@ -169,8 +180,8 @@ router.post('/login', (req, res) => {
 		const validPassword = dbUserData.checkPassword(req.body.password);
 
 		if (!validPassword) {
-      req.flash('error', 'Incorrect credentials')
-      res.redirect('/login');
+			req.flash('error', 'Incorrect credentials');
+			res.redirect('/login');
 			res.status(400).json({ message: 'Incorrect password!' });
 			return;
 		}
@@ -178,14 +189,14 @@ router.post('/login', (req, res) => {
 		// initiate creation of session and grab values for session variables from db
 		req.session.save(() => {
 			// declare session variables
-      req.session.user_id = dbUserData.id;
+			req.session.user_id = dbUserData.id;
 			req.session.username = dbUserData.username;
 			req.session.bio = dbUserData.bio;
 			req.session.medium = dbUserData.medium;
 			req.session.interests = dbUserData.interests;
 			req.session.loggedIn = true;
 
-      req.flash('success', 'You are now logged in!');
+			req.flash('success', 'You are now logged in!');
 			res.json({ user: dbUserData, message: 'You are now logged in!' });
 		});
 	});
@@ -194,11 +205,10 @@ router.post('/login', (req, res) => {
 // POST /api/users/logout
 // logout -- if user is loggedIn, destroy session variables and reset cookie to clear session, then send res back to client so it can redirect user to homepage
 router.post('/logout', (req, res) => {
-
 	if (req.session.loggedIn) {
-    // DOESN'T WORK BECAUSE SESSION GETS DESTROYED.  IS THERE ANOTHER WAY TO LOG OUT USER WITHOUT DESTROYING SESSION?
-    // req.flash('success', 'You have logged out!');
-    req.flash('success', 'You have logged out!');
+		// DOESN'T WORK BECAUSE SESSION GETS DESTROYED.  IS THERE ANOTHER WAY TO LOG OUT USER WITHOUT DESTROYING SESSION?
+		// req.flash('success', 'You have logged out!');
+		req.flash('success', 'You have logged out!');
 		req.session.destroy(() => {
 			res.status(204).end();
 		});

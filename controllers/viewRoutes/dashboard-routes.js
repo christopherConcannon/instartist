@@ -3,87 +3,34 @@ const { Post, User, Comment } = require('../../models');
 const withAuth = require('../../utils/auth');
 
 // GET /dashboard -- redirected on successful login/signup events in public/js/login.js and requested from dashboard button in nav
-
-// maybe need to refactor to query user by id then pass posts in to template so that we don't have to populate user meta by req.session.vars because that is why dashboard is not populating with updated user meta data when the user is edited.  then we'll have to refactor dashboard.handlebars to access the right data
 router.get('/', withAuth, (req, res) => {
 	User.findOne({
 		where      : {
-			user_id : req.session.user_id
+			id : req.session.user_id
 		},
-		attributes : [
-      'username', 
-      'bio', 
-      'medium',
-      'interests'
-    ],
-    include: [
-      {
-        model: Post,
-        attributes: ['title', 'dimension', 'description', 'media', 'img_url' ]
-      }
-    ]
-  })
-  .then((dbUserData) => {
-    const user = 
-  })
+		attributes : [ 'id', 'username', 'bio', 'medium', 'interests' ],
+		include    : [
+			{
+        model      : Post,
+        attributes : [ 'id', 'title', 'dimension', 'description', 'media', 'img_url', 'created_at' ],
+        // ALERT!!!!!NOT WORKING!!!!! - NEED TO ORDER POSTS SO THAT MOST RECENT IS DISPLAYED AT TOP LEFT (FIRST)
+        order      : [ [ 'created_at', 'DESC' ] ]
+			}
+		]
+	})
+		.then((dbUserData) => {
+			const user = dbUserData.get({ plain: true });
+
+			res.render('dashboard', {
+				user,
+				loggedIn : true
+			});
+		})
+		.catch((err) => {
+			console.log(err);
+			res.status(500).json(err);
+		});
 });
-// router.get('/', withAuth, (req, res) => {
-// 	Post.findAll({
-// 		where      : {
-// 			// use the ID from the session
-// 			user_id : req.session.user_id
-// 		},
-// 		attributes : [
-// 			'id',
-// 			'title',
-// 			'dimension',
-// 			'description',
-// 			'media',
-// 			'img_url',
-// 			'created_at'
-// 		],
-// 		order      : [ [ 'created_at', 'DESC' ] ],
-// 		include    : [
-// 			{
-// 				model      : Comment,
-// 				attributes : [ 'id', 'comment_text', 'post_id', 'user_id', 'created_at' ],
-// 				include    : {
-// 					model      : User,
-// 					attributes : [ 'username' ]
-// 				}
-// 			},
-// 			{
-// 				model      : User,
-// 				attributes : [ 'username', 'bio', 'medium', 'interests' ]
-// 			}
-// 		]
-// 	})
-// 		.then((dbPostData) => {
-// 			// serialize data before passing to template
-// 			const posts = dbPostData.map((post) => post.get({ plain: true }));
-
-// 			// // console.log(posts);
-// 			const userMeta = {
-// 				username  : req.session.username,
-// 				bio       : req.session.bio,
-// 				medium    : req.session.medium,
-// 				interests : req.session.interests
-// 			};
-
-// 			// render template and pass through db data
-// 			res.render('dashboard', {
-// 				posts,
-// 				username : req.session.username,
-// 				user_id  : req.session.user_id,
-// 				userMeta,
-// 				loggedIn : true
-// 			});
-// 		})
-// 		.catch((err) => {
-// 			console.log(err);
-// 			res.status(500).json(err);
-// 		});
-// });
 
 // GET /dashboard/edit/1 -- render post edit form view by id
 router.get('/edit/:id', withAuth, (req, res) => {
