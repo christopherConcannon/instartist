@@ -12,11 +12,12 @@ router.get('/', withAuth, (req, res) => {
 		include    : [
 			{
         model      : Post,
-        attributes : [ 'id', 'title', 'dimension', 'description', 'media', 'img_url', 'created_at' ],
+        attributes : [ 'id', 'title', 'dimension', 'description', 'media', 'img_url', 'created_at' ]
         // ALERT!!!!!NOT WORKING!!!!! - NEED TO ORDER POSTS SO THAT MOST RECENT IS DISPLAYED AT TOP LEFT (FIRST)
-        order      : [ [ 'created_at', 'DESC' ] ]
 			}
-		]
+    ],
+    // To order by the attributes of an include, you don't put the order attribute inside the include - it has to go at the root of the options. You specify an array which traces it's way through the includes.
+    order      : [ [ Post, 'created_at', 'DESC' ] ]
 	})
 		.then((dbUserData) => {
 			const user = dbUserData.get({ plain: true });
