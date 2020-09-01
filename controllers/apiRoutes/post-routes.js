@@ -93,6 +93,7 @@ router.put('/:id', withAuth, imgUpload.single('work-img'), (req, res) => {
 		});
 });
 
+
 // DELETE /api/posts/1
 router.delete('/:id', withAuth, (req, res) => {
 	Comment.destroy({
