@@ -34,8 +34,31 @@ router.post('/', withAuth, imgUpload.single('work-img'), (req, res) => {
 
 // PUT /api/posts/1
 router.put('/:id', withAuth, imgUpload.single('work-img'), (req, res) => {
-  cloudinary.uploader.destroy(req.session.public_id, () => {
-  req.session.public_id = req.file.filename;
+	Post.findOne(
+		{
+			attributes : [ 'title', 'public_id' ]
+		},
+		{
+			where : {
+				id : req.params.id
+			}
+		}
+	)
+		.then((oldPostData) => {
+			console.log('old post data', oldPostData);
+
+			const oldPublicId = oldPostData.get({ plain: true });
+			console.log('old public_id: ', oldPublicId.public_id);
+			console.log('old title: ', oldPublicId.title);
+			cloudinary.uploader.destroy(oldPublicId.public_id, () => {
+				console.log(oldPublicId, ' deleted');
+			});
+		})
+		.catch((err) => {
+			console.log(err);
+			res.status(500).json(err);
+		});
+
 	Post.update(
 		{
 			title       : req.body.title,
@@ -51,50 +74,24 @@ router.put('/:id', withAuth, imgUpload.single('work-img'), (req, res) => {
 			}
 		}
 	)
-		.then((dbPostData) => {
-			if (!dbPostData) {
+		.then((newPostData) => {
+			if (!newPostData) {
+				console.log('no new post data');
 				res.status(404).json({ message: 'No post found with this id' });
 				return;
 			}
+			// console.log('updated data:', newPostData);
+			// const newData = newPostData.get({ plain: true });
+			// console.log('updated public_id: ', newData.public_id);
+			// console.log('updated title', newData.title);
 			req.flash('success', 'Your work has been updated!');
-			res.json(dbPostData);
+			res.json(newPostData);
 		})
 		.catch((err) => {
 			console.log(err);
 			res.status(500).json(err);
 		});
-	});
 });
-
-// // PUT /api/posts/1
-// router.put('/:id', withAuth, imgUpload.single('work-img'), (req, res) => {
-// 	Post.update(
-// 		{
-// 			title       : req.body.title,
-// 			dimension   : req.body.dimensions,
-// 			description : req.body.description,
-// 			media       : req.body.media,
-// 			img_url     : req.file.path
-// 		},
-// 		{
-// 			where : {
-// 				id : req.params.id
-// 			}
-// 		}
-// 	)
-// 		.then((dbPostData) => {
-// 			if (!dbPostData) {
-// 				res.status(404).json({ message: 'No post found with this id' });
-// 				return;
-// 			}
-// 			req.flash('success', 'Your work has been updated!');
-// 			res.json(dbPostData);
-// 		})
-// 		.catch((err) => {
-// 			console.log(err);
-// 			res.status(500).json(err);
-// 		});
-// });
 
 // DELETE /api/posts/1
 router.delete('/:id', withAuth, (req, res) => {
