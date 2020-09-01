@@ -82,7 +82,7 @@ router.put('/:id', withAuth, (req, res) => {
       interests: req.body.interests
     }, 
     {
-		// individualHooks : false,
+		individualHooks : false,
 		where           : {
 			id : req.params.id
 		}

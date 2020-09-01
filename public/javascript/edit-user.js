@@ -19,7 +19,7 @@ async function updateFormHandler(event) {
     }),
     headers: { 'Content-Type': 'application/json' }
   });
-  console.log(response);
+  // console.log(response);
 
   // check the response status
   if (response.ok) {

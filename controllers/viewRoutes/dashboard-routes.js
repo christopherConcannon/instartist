@@ -3,13 +3,23 @@ const { Post, User, Comment } = require('../../models');
 const withAuth = require('../../utils/auth');
 
 // GET /dashboard -- redirected on successful login/signup events in public/js/login.js and requested from dashboard button in nav
+
+// maybe need to refactor to query user by id then pass posts in to template so that we don't have to populate user meta by req.session.vars because that is why dashboard is not populating with updated user meta data when the user is edited.  then we'll have to refactor dashboard.handlebars to access the right data
 router.get('/', withAuth, (req, res) => {
 	Post.findAll({
 		where      : {
 			// use the ID from the session
 			user_id : req.session.user_id
 		},
-		attributes : [ 'id', 'title','dimension','description','media','img_url', 'created_at' ],
+		attributes : [
+			'id',
+			'title',
+			'dimension',
+			'description',
+			'media',
+			'img_url',
+			'created_at'
+		],
 		order      : [ [ 'created_at', 'DESC' ] ],
 		include    : [
 			{
@@ -28,22 +38,22 @@ router.get('/', withAuth, (req, res) => {
 	})
 		.then((dbPostData) => {
 			// serialize data before passing to template
-      const posts = dbPostData.map((post) => post.get({ plain: true }));
+			const posts = dbPostData.map((post) => post.get({ plain: true }));
 
-      // console.log(posts);
-      const userMeta = {
-        username: req.session.username,
-        bio: req.session.bio,
-        medium: req.session.medium,
-        interests: req.session.interests
-      }
-      
+			// // console.log(posts);
+			const userMeta = {
+				username  : req.session.username,
+				bio       : req.session.bio,
+				medium    : req.session.medium,
+				interests : req.session.interests
+			};
+
 			// render template and pass through db data
 			res.render('dashboard', {
-        posts,
-		    username: req.session.username,
-		    user_id:req.session.user_id,
-        userMeta,
+				posts,
+				username : req.session.username,
+				user_id  : req.session.user_id,
+				userMeta,
 				loggedIn : true
 			});
 		})
@@ -59,7 +69,15 @@ router.get('/edit/:id', withAuth, (req, res) => {
 		where      : {
 			id : req.params.id
 		},
-		attributes :  [ 'id', 'title','dimension','description','media','img_url', 'created_at' ],
+		attributes : [
+			'id',
+			'title',
+			'dimension',
+			'description',
+			'media',
+			'img_url',
+			'created_at'
+		],
 		include    : [
 			{
 				model      : Comment,
@@ -99,21 +117,29 @@ router.get('/edit/:id', withAuth, (req, res) => {
 // GET /dashboard/new -- render form to add new post
 router.get('/new', withAuth, (req, res) => {
 	res.render('add-post', {
-    loggedIn : true
-  });
+		loggedIn : true
+	});
 });
 
 // GET /dashboard/user/:id -- render form to edit user
-router.get('/user/:id',withAuth, (req, res)=>{	
-	console.log(req.params.id)
+router.get('/user/:id', withAuth, (req, res) => {
+	console.log(req.params.id);
 	User.findOne({
-		where      : {
+		where   : {
 			id : req.params.id
 		},
-		include    : [
+		include : [
 			{
 				model      : Post,
-				attributes : [ 'id', 'title','dimension','description','media','img_url', 'created_at' ],
+				attributes : [
+					'id',
+					'title',
+					'dimension',
+					'description',
+					'media',
+					'img_url',
+					'created_at'
+				]
 			},
 			{
 				model      : Comment,
@@ -131,7 +157,7 @@ router.get('/user/:id',withAuth, (req, res)=>{
 				return;
 			}
 			const userMeta = dbUserData.get({ plain: true });
-			console.log("user datos", userMeta)
+			// console.log("user datos", userMeta)
 			// pass data to template
 			res.render('edit-user', {
 				userMeta,
@@ -141,11 +167,10 @@ router.get('/user/:id',withAuth, (req, res)=>{
 		.catch((err) => {
 			console.log(err);
 			res.status(500).json(err);
-		});	
-	
-})
+		});
+});
 
-// this is the dashboard routes for views!  this should not be here...path will be /dashboard/etc not /api/etc.  user related routes should be in api/user-routes.js 
+// this is the dashboard routes for views!  this should not be here...path will be /dashboard/etc not /api/etc.  user related routes should be in api/user-routes.js
 
 // // DELETE /api/users/1
 // router.delete('/user/:id', withAuth, (req, res) => {
@@ -153,7 +178,7 @@ router.get('/user/:id',withAuth, (req, res)=>{
 // 		where:{
 // 			user_id: req.params.id
 // 		}
-		
+
 // 	})
 // 	Comment.destroy({
 // 		where : {
@@ -180,4 +205,3 @@ router.get('/user/:id',withAuth, (req, res)=>{
 // });
 
 module.exports = router;
-
