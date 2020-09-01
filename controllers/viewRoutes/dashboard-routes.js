@@ -4,6 +4,54 @@ const { Post, User, Comment } = require('../../models');
 const withAuth = require('../../utils/auth');
 
 // GET /dashboard -- redirected on successful login/signup events in public/js/login.js and requested from dashboard button in nav
+
+
+router.get('/', (req, res) => {
+	User.findOne({
+		attributes : { exclude: [ 'password' ] },
+		where      : {
+			username: req.session.username
+		},
+		include    : [
+			{
+				model      : Post,
+				attributes : [ 'id', 'title','dimension','description','media','img_url', 'created_at' ],
+			},
+			{
+				model      : Comment,
+				attributes : [ 'id', 'comment_text', 'created_at' ],
+				include    : {
+					model      : Post,
+					attributes : [ 'title' ]
+				}
+			}
+		]
+	})
+		.then((dbUserData) => {
+			if (!dbUserData) {
+				res.status(404).json({ message: 'No user found with this id' });
+				return;
+			}
+            const user = dbUserData.get({ plain: true });
+            const posts=user.posts;
+            const comments=dbUserData.comments;
+            console.log("comentarios",comments)
+            console.log('los posts',posts)
+            console.log('usuarios desde prueba',user.id)
+            // pass data to template
+            
+			res.render('dashboard', {
+                user,
+                posts,
+                comments,
+				loggedIn : true
+			});		})
+		});
+
+
+
+
+
 router.get('/', withAuth, (req, res) => {
 	Post.findAll({
 		where      : {
@@ -105,7 +153,7 @@ router.get('/new', withAuth, (req, res) => {
 });
 
 // GET /dashboard/edit/1
-router.get('/edit/:id', withAuth, (req, res) => {
+/*router.get('/edit/:id', withAuth, (req, res) => {
 	Post.findOne({
 		where      : {
 			id : req.params.id
@@ -145,7 +193,7 @@ router.get('/edit/:id', withAuth, (req, res) => {
 			console.log(err);
 			res.status(500).json(err);
 		});
-}); 
+}); */
 
 router.get('/user/:id',withAuth, (req, res)=>{	
 	console.log(req.params.id)
