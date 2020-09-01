@@ -34,11 +34,6 @@ Post.init(
 				isUrl: true
 			}
     },
-    // file name of image in Cloudinary, needed for deleting
-    public_id: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
 		user_id: {
 			type: DataTypes.INTEGER,
 			references: {
