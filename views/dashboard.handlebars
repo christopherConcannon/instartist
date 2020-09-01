@@ -7,25 +7,25 @@
       </div>
       <div class="col-md-8">
         <div class="card-body">
-          <h5 class="card-title">{{userMeta.username}}</h5>
-          {{#if userMeta.bio}}
-            <p class="card-text">Bio: {{userMeta.bio}}</p>
+          <h5 class="card-title">{{user.username}}</h5>
+          {{#if user.bio}}
+            <p class="card-text">Bio: {{user.bio}}</p>
           {{/if}}
-          {{#if userMeta.medium}}
-            <p class="card-text">Preferred medium: {{userMeta.medium}}</p>
+          {{#if user.medium}}
+            <p class="card-text">Preferred medium: {{user.medium}}</p>
           {{/if}}
-          {{#if userMeta.interests}}
-            <p class="card-text">Interests: {{userMeta.interests}}</p>
+          {{#if user.interests}}
+            <p class="card-text">Interests: {{user.interests}}</p>
           {{/if}}
           <a href="/dashboard/new" class="btn btn-dark">Upload Work</a>
-          <a href="/dashboard/user/{{user_id}}" class="btn btn-dark">Update User</a>
+          <a href="/dashboard/user/{{user.id}}" class="btn btn-dark">Update User</a>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-  {{#if posts.length}}
+ {{#if posts.length}}
 
       <h1 class="font-weight-light text-center text-lg-left mt-4 mb-0">Your Work</h1>
 
@@ -45,7 +45,3 @@
       </div>{{!-- /.row --}}
     </div>{{!-- /.container --}}
   {{/if}}
-
-
-
-

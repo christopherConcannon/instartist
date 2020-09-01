@@ -87,6 +87,7 @@ router.put('/:id', withAuth, (req, res) => {
 				return;
 			}
 			res.json(dbUserData);
+			
 		})
 		.catch((err) => {
 			console.log(err);
