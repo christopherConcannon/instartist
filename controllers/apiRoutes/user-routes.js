@@ -70,9 +70,6 @@ router.post('/', (req, res) => {
 		req.session.save(() => {
 			req.session.user_id = dbUserData.id;
 			req.session.username = dbUserData.username;
-			req.session.bio = dbUserData.bio;
-			req.session.medium = dbUserData.medium;
-			req.session.interests = dbUserData.interests;
 			req.session.loggedIn = true;
 
 			req.flash('success', `Hi ${req.session.username}, welcome to Instartist!`);
@@ -135,7 +132,7 @@ router.put('/:id', withAuth, (req, res) => {
 router.delete('/:id', withAuth, (req, res) => {
 	Comment.destroy({
 		where : {
-			user_id : req.params.id
+      user_id : req.params.id
 		}
 	}).then(() => {
 		Post.destroy({
@@ -197,14 +194,11 @@ router.post('/login', (req, res) => {
 		// initiate creation of session and grab values for session variables from db
 		req.session.save(() => {
 			// declare session variables
-			req.session.user_id = dbUserData.id;
-			req.session.username = dbUserData.username;
-			req.session.bio = dbUserData.bio;
-			req.session.medium = dbUserData.medium;
-			req.session.interests = dbUserData.interests;
+      req.session.user_id = dbUserData.id;
+      req.session.username = dbUserData.username;
 			req.session.loggedIn = true;
 
-			req.flash('success', 'You are now logged in!');
+			req.flash('success', `Hi ${req.session.username}, welcome back to Instartist!`);
 			res.json({ user: dbUserData, message: 'You are now logged in!' });
 		});
 	});
