@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { User, Post, Comment } = require('../../models');
 const withAuth = require('../../utils/auth');
+const imgUpload = require('../../config/imgUpload');
 
 // GET /api/users
 router.get('/', (req, res) => {
@@ -58,14 +59,15 @@ router.get('/:id', (req, res) => {
 });
 
 // POST /api/users -- create user on signup
-router.post('/', (req, res) => {
+router.post('/', imgUpload.single('user-img'), (req, res) => {
 	User.create({
 		username  : req.body.username,
 		email     : req.body.email,
 		password  : req.body.password,
 		bio       : req.body.bio,
 		medium    : req.body.medium,
-		interests : req.body.interests
+    interests : req.body.interests,
+    user_img_url : req.file.path
 	}).then((dbUserData) => {
 		req.session.save(() => {
 			req.session.user_id = dbUserData.id;

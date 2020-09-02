@@ -1,4 +1,4 @@
-async function newFormHandler(event) {
+async function newPostFormHandler(event) {
 	event.preventDefault();
 
 	const form = document.querySelector('#new-post-form');
@@ -24,9 +24,9 @@ async function newFormHandler(event) {
 		alert(response.statusText);
 	}
 
-	// spinnerWrapper.classList.add('d-none');
-	// spinner.classList.add('d-none');
-	// form.classList.remove('d-none');
+	spinnerWrapper.classList.add('d-none');
+	spinner.classList.add('d-none');
+	form.classList.remove('d-none');
 }
 
-document.querySelector('#new-post-form').addEventListener('submit', newFormHandler);
+document.querySelector('#new-post-form').addEventListener('submit', newPostFormHandler);

@@ -1,9 +1,13 @@
 <div class="container">
   <div class="card mb-12" style="fluid-width: 540px;">
     <div class="row no-gutters">
-      <div class="col-md-4">
+      <div class="col-md-4 d-flex justify-content-center align-items-center">
         {{!-- User Image/Maybe Random Image of Art --}}
-        <img src="https://source.unsplash.com/pWkk7iiCoDM/400x300" class="card-img" alt="">
+        {{#if user.user_img_url}}
+          <img src="{{user.user_img_url}}" id="user-img" class="card-img" alt="">
+        {{else}}
+          <img src="https://source.unsplash.com/pWkk7iiCoDM/400x300" class="card-img" alt="">
+        {{/if}}
       </div>
       <div class="col-md-8">
         <div class="card-body">
