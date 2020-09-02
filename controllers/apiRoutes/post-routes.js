@@ -22,7 +22,7 @@ router.post('/', withAuth, imgUpload.single('work-img'), (req, res) => {
 		})
 		.catch((err) => {
 			console.log(err);
-      req.flash('error', 'There was a problem, your new work could not be added. Please try again later.');
+      		req.flash('error', 'There was a problem, your new work could not be added. Please try again later.');
 			res.status(500).json(err);
 		});
 });

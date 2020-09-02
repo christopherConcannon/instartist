@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { User, Post, Comment } = require('../../models');
 const withAuth = require('../../utils/auth');
+const imgUpload = require('../../config/imgUpload');
 
 // GET /api/users
 router.get('/', (req, res) => {
@@ -49,7 +50,7 @@ router.get('/:id', (req, res) => {
 		});
 });
 
-// POST /api/users -- create user on signup
+//POST /api/users -- create user on signup
 // router.post('/', (req, res) => {
 // 	User.create({
 // 		username : req.body.username,
@@ -64,22 +65,40 @@ router.get('/:id', (req, res) => {
 // 			req.session.interests = dbUserData.interests;
 // 			req.session.loggedIn = true;
 // 			res.json(dbUserData);
+//			req.flash('success', `Hi ${req.session.username}, welcome to Instartist!`);
+//			res.json(dbUserData);	
 // 		});
-// 	});
+
+// 		User.create
+// 		.then((dbPostData) => res.json(dbPostData))
+// 		.catch((err) => {
+// 		console.log(err);
+// 		res.status(500).json(err);
+// 		});
+// 	  });
 // });
 
-router.post('/', withAuth, imgUpload.single('work-img'), (req, res) => {
+router.post('/', imgUpload.single('user-img'), (req, res) => {
+
 	User.create({
-		username : req.body.username,
-		email : req.body.email,
-		password : req.body.password
-	}).then((dbUserData) => {
+		username 	: req.body.username,
+		email 		: req.body.email,
+		password 	: req.body.password,
+		bio			: req.body.bio,
+		medium		: req.body.medium,
+		interestes	: req.body.interests, 
+		user_url 	: req.file.path,
+		user_id		: req.session.user_id	
+	})
+		
+	.then((dbUserData) => {
 		req.session.save(() => {
 			req.session.user_id = dbUserData.id;
 			req.session.username = dbUserData.username;
 			req.session.bio = dbUserData.bio;
 			req.session.medium = dbUserData.medium;
 			req.session.interests = dbUserData.interests;
+			req.session.user_url = dbUserData.user_url;
       req.session.loggedIn = true;
       
       req.flash('success', `Hi ${req.session.username}, welcome to Instartist!`);
@@ -87,15 +106,6 @@ router.post('/', withAuth, imgUpload.single('work-img'), (req, res) => {
 		});
 	});
 
-	Post.create
-	.then((dbPostData) => res.json(dbPostData))
-	.catch((err) => {
-		console.log(err);
-		res.status(500).json(err);
-	});
-
-	console.log(req.file);
-	console.log(req.body);
 });
 
 // PUT /api/users/1
@@ -182,6 +192,7 @@ router.post('/login', (req, res) => {
 			req.session.bio = dbUserData.bio;
 			req.session.medium = dbUserData.medium;
 			req.session.interests = dbUserData.interests;
+			req.session.user_url = dbUserData.user_url;
 			req.session.loggedIn = true;
 
       req.flash('success', 'You are now logged in!');

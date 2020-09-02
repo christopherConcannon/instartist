@@ -16,7 +16,6 @@ User.init(
 			primaryKey: true,
 			autoIncrement: true
 		},
-
 		username: {
 			type: DataTypes.STRING,
 			unique: true,
@@ -37,18 +36,34 @@ User.init(
 				len: [4]
 			}
 		},	 
-    bio: {
-      type: DataTypes.STRING,
-      allowNull: true
-    },
-    medium: {
-      type: DataTypes.STRING,
-      allowNull: true
-    },
-    interests: {
-      type: DataTypes.STRING,
-      allowNull: true
-    }
+    	bio: {
+      		type: DataTypes.STRING,
+      		allowNull: true
+    	},
+    	medium: {
+      		type: DataTypes.STRING,
+      		allowNull: true
+    	},
+    	interests: {
+      		type: DataTypes.STRING,
+      		allowNull: true
+		},
+		// 
+		user_url: {
+			type: DataTypes.STRING,
+			allowNull: false,
+		  	validate: {
+			  	isUrl: true
+		  	}
+		},
+		user_id: {
+			type: DataTypes.INTEGER,
+			references: {
+				model: 'user',
+				key: 'id'
+			}
+		}
+		// 
 	},
 	{
 		hooks: {
