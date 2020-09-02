@@ -130,15 +130,15 @@ router.put('/:id', withAuth, (req, res) => {
 // 		});
 // });
 
+
 // DELETE /api/users/1
 router.delete('/:id', withAuth, (req, res) => {
-	Post.destroy({
-		//delete post when delete a user
+	Comment.destroy({
 		where : {
 			user_id : req.params.id
 		}
 	}).then(() => {
-		Comment.destroy({
+		Post.destroy({
 			where : {
 				user_id : req.params.id
 			}
@@ -162,6 +162,14 @@ router.delete('/:id', withAuth, (req, res) => {
 		});
 	});
 });
+
+// Executing (default): DELETE FROM `comment` WHERE `user_id` = '1'
+// Executing (default): DELETE FROM `post` WHERE `user_id` = '1'
+// (node:24588) UnhandledPromiseRejectionWarning: SequelizeForeignKeyConstraintError: Cannot delete or update a parent row: a foreign key constraint fails (`instartist_db`.`comment`, CONSTRAINT `comment_ibfk_2` FOREIGN KEY (`post_id`) REFERENCES `post` (`id`) ON UPDATE CASCADE)
+//     at Query.formatError (C:\Users\cmcon\Desktop\ut coding program\MODULES\Module-15-and-16-PROJECT-TWO\instartist\node_modules\sequelize\lib\dialects\mysql\query.js:228:16)
+//     at Query.run (C:\Users\cmcon\Desktop\ut coding program\MODULES\Module-15-and-16-PROJECT-TWO\instartist\node_modules\sequelize\lib\dialects\mysql\query.js:54:18)    at processTicksAndRejections (internal/process/task_queues.js:97:5)
+// (node:24588) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 1)
+// (node:24588) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
 
 // POST /api/users/login -- login
 router.post('/login', (req, res) => {
