@@ -1,14 +1,42 @@
-{{!-- {{#each posts}}
- {{> post-info }}
-{{/each}} --}}
+
+{{>header}}
+
+
 
 
 
 <!-- Page Content -->
-<div class="container">
+
+  {{!-- <div class="container-fluid banner gallery">
+  <div class="row">
+    <div class="col-md-12">
+      <nav class="navbar navbar-md">
+        <div class="navbar-brand">INSTARTIST</div>
+        <ul class=" nav">
+          <li class="nav-item active">
+            <a class="nav-link" href="/">Gallery <span class="sr-only">(current)</span></a>
+          </li>
+          {{#if loggedIn}}
+          <li class="nav-item">
+            <a class="nav-link" href="/dashboard">Dashboard</a>
+          </li>
+          <li class="nav-item">
+            <a id="logout" class="nav-link" href="#">Logout</a>
+          </li>
+          {{else}}
+          <li class="nav-item">
+            <a class="nav-link" href="/signup">Signup</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/login">Login</a>
+          </li>
+          {{/if}}
+        </ul>
+      </nav>
+    </header>
 
   <h1 class="font-weight-light text-center text-lg-left mt-4 mb-0">Our Work</h1>
-
+    </div>
   <hr class="mt-2 mb-5">
 
   <div class="row text-center text-lg-left">
@@ -19,69 +47,6 @@
           <img class="img-fluid img-thumbnail" src="{{img_url}}" alt="">
         </a>
       </div>
-    {{/each}}
+    {{/each}} --}}
 
-    {{!-- <div class="col-lg-3 col-md-4 col-6">
-      <a href="#" class="d-block mb-4 h-100">
-            <img class="img-fluid img-thumbnail" src="https://source.unsplash.com/pWkk7iiCoDM/400x300" alt="">
-          </a>
-    </div>
-    <div class="col-lg-3 col-md-4 col-6">
-      <a href="#" class="d-block mb-4 h-100">
-            <img class="img-fluid img-thumbnail" src="https://source.unsplash.com/aob0ukAYfuI/400x300" alt="">
-          </a>
-    </div>
-    <div class="col-lg-3 col-md-4 col-6">
-      <a href="#" class="d-block mb-4 h-100">
-            <img class="img-fluid img-thumbnail" src="https://source.unsplash.com/EUfxH-pze7s/400x300" alt="">
-          </a>
-    </div>
-    <div class="col-lg-3 col-md-4 col-6">
-      <a href="#" class="d-block mb-4 h-100">
-            <img class="img-fluid img-thumbnail" src="https://source.unsplash.com/M185_qYH8vg/400x300" alt="">
-          </a>
-    </div>
-    <div class="col-lg-3 col-md-4 col-6">
-      <a href="#" class="d-block mb-4 h-100">
-            <img class="img-fluid img-thumbnail" src="https://source.unsplash.com/sesveuG_rNo/400x300" alt="">
-          </a>
-    </div>
-    <div class="col-lg-3 col-md-4 col-6">
-      <a href="#" class="d-block mb-4 h-100">
-            <img class="img-fluid img-thumbnail" src="https://source.unsplash.com/AvhMzHwiE_0/400x300" alt="">
-          </a>
-    </div>
-    <div class="col-lg-3 col-md-4 col-6">
-      <a href="#" class="d-block mb-4 h-100">
-            <img class="img-fluid img-thumbnail" src="https://source.unsplash.com/2gYsZUmockw/400x300" alt="">
-          </a>
-    </div>
-    <div class="col-lg-3 col-md-4 col-6">
-      <a href="#" class="d-block mb-4 h-100">
-            <img class="img-fluid img-thumbnail" src="https://source.unsplash.com/EMSDtjVHdQ8/400x300" alt="">
-          </a>
-    </div>
-    <div class="col-lg-3 col-md-4 col-6">
-      <a href="#" class="d-block mb-4 h-100">
-            <img class="img-fluid img-thumbnail" src="https://source.unsplash.com/8mUEy0ABdNE/400x300" alt="">
-          </a>
-    </div>
-    <div class="col-lg-3 col-md-4 col-6">
-      <a href="#" class="d-block mb-4 h-100">
-            <img class="img-fluid img-thumbnail" src="https://source.unsplash.com/G9Rfc1qccH4/400x300" alt="">
-          </a>
-    </div>
-    <div class="col-lg-3 col-md-4 col-6">
-      <a href="#" class="d-block mb-4 h-100">
-            <img class="img-fluid img-thumbnail" src="https://source.unsplash.com/aJeH0KcFkuc/400x300" alt="">
-          </a>
-    </div>
-    <div class="col-lg-3 col-md-4 col-6">
-      <a href="#" class="d-block mb-4 h-100">
-            <img class="img-fluid img-thumbnail" src="https://source.unsplash.com/p2TQ-3Bh3Oo/400x300" alt="">
-          </a>
-    </div> --}}
-
-  </div><!-- /.row -->
-
-</div><!-- /.container -->
+  
