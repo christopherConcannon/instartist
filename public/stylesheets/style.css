@@ -1,5 +1,10 @@
 .img-thumbnail {
   border: none;
+  height: 27vh;
+}
+
+.single-post-img {
+  height: 80vh;
 }
 
 

@@ -24,7 +24,7 @@ router.get('/:id', (req, res) => {
 		include    : [
 			{
 				model      : Post,
-				attributes : [ 'id', 'title', 'content', 'created_at' ]
+				attributes : [ 'id', 'title','dimension','description','media','img_url', 'created_at' ],
 			},
 			{
 				model      : Comment,
@@ -80,7 +80,9 @@ router.post('/', withAuth, imgUpload.single('work-img'), (req, res) => {
 			req.session.bio = dbUserData.bio;
 			req.session.medium = dbUserData.medium;
 			req.session.interests = dbUserData.interests;
-			req.session.loggedIn = true;
+      req.session.loggedIn = true;
+      
+      req.flash('success', `Hi ${req.session.username}, welcome to Instartist!`);
 			res.json(dbUserData);
 		});
 	});
@@ -97,9 +99,9 @@ router.post('/', withAuth, imgUpload.single('work-img'), (req, res) => {
 });
 
 // PUT /api/users/1
-router.put('/:id', withAuth, (req, res) => {
+router.put('/:id', withAuth, (req, res) => {	
 	User.update(req.body, {
-		individualHooks : true,
+		individualHooks : false,
 		where           : {
 			id : req.params.id
 		}
@@ -119,6 +121,12 @@ router.put('/:id', withAuth, (req, res) => {
 
 // DELETE /api/users/1
 router.delete('/:id', withAuth, (req, res) => {
+	Post.destroy({   //delete post when delete a user
+		where:{
+			user_id:req.params.id
+		}
+		
+	})
 	Comment.destroy({
 		where : {
 			user_id : req.params.id
@@ -160,6 +168,8 @@ router.post('/login', (req, res) => {
 		const validPassword = dbUserData.checkPassword(req.body.password);
 
 		if (!validPassword) {
+      req.flash('error', 'Incorrect credentials')
+      res.redirect('/login');
 			res.status(400).json({ message: 'Incorrect password!' });
 			return;
 		}
@@ -174,6 +184,7 @@ router.post('/login', (req, res) => {
 			req.session.interests = dbUserData.interests;
 			req.session.loggedIn = true;
 
+      req.flash('success', 'You are now logged in!');
 			res.json({ user: dbUserData, message: 'You are now logged in!' });
 		});
 	});
@@ -182,7 +193,11 @@ router.post('/login', (req, res) => {
 // POST /api/users/logout
 // logout -- if user is loggedIn, destroy session variables and reset cookie to clear session, then send res back to client so it can redirect user to homepage
 router.post('/logout', (req, res) => {
+
 	if (req.session.loggedIn) {
+    // DOESN'T WORK BECAUSE SESSION GETS DESTROYED.  IS THERE ANOTHER WAY TO LOG OUT USER WITHOUT DESTROYING SESSION?
+    // req.flash('success', 'You have logged out!');
+    req.flash('success', 'You have logged out!');
 		req.session.destroy(() => {
 			res.status(204).end();
 		});
