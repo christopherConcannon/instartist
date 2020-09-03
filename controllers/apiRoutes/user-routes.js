@@ -142,6 +142,7 @@ router.delete('/:id', withAuth, (req, res) => {
 	});
 });
 
+// ERROR RECEIVED WHEN TRYING TO DELETE USER-A IF USER-B HAS COMMENTED ON A USER-A POST.  ALL OTHER DELETE SCENARIOS WORK.  LEARNING ASSISTANT RECOMMENDS REMOVING POST_ID CONSTRAINT IN COMMENT MODEL 
 // Executing (default): DELETE FROM `comment` WHERE `user_id` = '1'
 // Executing (default): DELETE FROM `post` WHERE `user_id` = '1'
 // (node:24588) UnhandledPromiseRejectionWarning: SequelizeForeignKeyConstraintError: Cannot delete or update a parent row: a foreign key constraint fails (`instartist_db`.`comment`, CONSTRAINT `comment_ibfk_2` FOREIGN KEY (`post_id`) REFERENCES `post` (`id`) ON UPDATE CASCADE)
