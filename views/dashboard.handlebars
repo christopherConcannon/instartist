@@ -4,9 +4,9 @@
       <div class="col-md-4 d-flex justify-content-center align-items-center">
         {{!-- User Image/Maybe Random Image of Art --}}
         {{#if user.user_img_url}}
-          <img src="{{user.user_img_url}}" id="user-img" class="card-img" alt="">
+          <img src="{{user.user_img_url}}" id="user-avatar" class="card-img" alt="">
         {{else}}
-          <img src="https://source.unsplash.com/pWkk7iiCoDM/400x300" class="card-img" alt="">
+          <img src="https://source.unsplash.com/pWkk7iiCoDM/400x300" id="user-no-avatar" class="card-img" alt="">
         {{/if}}
       </div>
       <div class="col-md-8">
