@@ -2,6 +2,7 @@ const cloudinary = require('cloudinary').v2;
 const { CloudinaryStorage } = require('multer-storage-cloudinary');
 const multer = require('multer');
 
+// heroku config vars are lowercase!
 cloudinary.config({
   cloud_name: process.env.cloud_name,
   api_key: process.env.api_key,
