@@ -4,7 +4,7 @@ const { Post, User, Comment } = require('../../models');
 // '/' homepage -- display index of all posts
 router.get('/', (req, res) => {
 	Post.findAll({
-		attributes : [ 'id', 'title', 'content', 'created_at' ],
+		attributes :  [ 'id', 'title','dimension','description','media','img_url', 'created_at' ],
 		order      : [ [ 'created_at', 'DESC' ] ],
 		include    : [
 			{
@@ -23,8 +23,6 @@ router.get('/', (req, res) => {
 	})
 		.then((dbPostData) => {
 			const posts = dbPostData.map((post) => post.get({ plain: true }));
-      // do we have access to the the post.user_id at each iteration that we could map a new prop to the object we send to the template, which will be associated with each post, that will indicate if the author is the logged in user?
-
 			res.render('homepage', {
 				posts,
         loggedIn : req.session.loggedIn
@@ -42,7 +40,7 @@ router.get('/post/:id', (req, res) => {
 		where      : {
 			id : req.params.id
 		},
-		attributes : [ 'id', 'title', 'content', 'created_at' ],
+		attributes :[ 'id', 'title','dimension','description','media','img_url', 'created_at' ],
 		include    : [
 			{
 				model      : Comment,
@@ -62,10 +60,11 @@ router.get('/post/:id', (req, res) => {
 			if (!dbPostData) {
 				res.status(404).json({ message: 'No post found with this id' });
 				return;
-			}
+      }
 
 			// serialize the data
 			const post = dbPostData.get({ plain: true });
+      console.log(post);
 
 			// pass data to template
 			res.render('single-post', {

@@ -1,5 +1,32 @@
 .img-thumbnail {
   border: none;
+  height: 27vh;
+}
+
+.single-post-img {
+  height: 80vh;
+}
+
+#user-avatar, #user-no-avatar {
+  width: 20vh;
+  height: 20vh;
+  border-radius: 50%;
+}
+
+
+/* spinner */
+/* .spinner-wrapper {
+  height: 100vh;
+} */
+
+#spinner {
+  width: 5rem;
+  height: 5rem;
+}
+
+/* signup form */
+#long-form {
+  display: none;
 }
 
 

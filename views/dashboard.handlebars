@@ -1,10 +1,55 @@
-{{#if posts.length}}
-{{#each posts}}
-  <div class="card border-light-dark">
-    <div class="flex-row justify-space-between card-header bg-light-dark text-primary">
-      <a href="/dashboard/edit/{{id}}"><h3>{{title}}</h3></a>
-       <p>{{format_date created_at}}</p>
+<div class="container">
+  <div class="card mb-12" style="fluid-width: 540px;">
+    <div class="row no-gutters">
+      <div class="col-md-4 d-flex justify-content-center align-items-center">
+        {{!-- User Image/Maybe Random Image of Art --}}
+        {{#if user.user_img_url}}
+          <img src="{{user.user_img_url}}" id="user-avatar" class="card-img" alt="">
+        {{else}}
+          <img src="https://source.unsplash.com/pWkk7iiCoDM/400x300" id="user-no-avatar" class="card-img" alt="">
+        {{/if}}
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title">{{user.username}}</h5>
+          {{#if user.bio}}
+            <p class="card-text">Bio: {{user.bio}}</p>
+          {{/if}}
+          {{#if user.medium}}
+            <p class="card-text">Preferred medium: {{user.medium}}</p>
+          {{/if}}
+          {{#if user.interests}}
+            <p class="card-text">Interests: {{user.interests}}</p>
+          {{/if}}
+          <a href="/dashboard/new" class="btn btn-dark">Upload Work</a>
+          <a href="/dashboard/user/{{user.id}}" class="btn btn-primary">Update User</a>
+        </div>
+      </div>
     </div>
   </div>
-{{/each}}
+</div>
+
+{{#if user.posts.length}}
+
+  <h1 class="font-weight-light text-center text-lg-left mt-4 mb-0">Your Work</h1>
+
+    <hr class="mt-2 mb-5">
+
+    <div class="row text-center text-lg-left">
+    
+      {{#each user.posts}} 
+
+        <div class="col-lg-3 col-md-4 col-6">
+          <a href="/dashboard/edit/{{id}}" class="d-block mb-4 h-100">
+            <img class="img-fluid img-thumbnail" src="{{img_url}}" alt="">
+          </a>
+        </div>
+    
+      {{/each}}
+    </div>{{!-- /.row --}}
+  </div>{{!-- /.container --}}
 {{/if}}
+
+
+
+
