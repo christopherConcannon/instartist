@@ -6,13 +6,12 @@
 
 # Description
 
-Instartist is a social media application to virtually expose works created by artists; also where users can interact with these works and leave their comments
+Instartist is a social media application for virtually exhibiting works created by artists; provides a community to display and share the perspective of works of art of all kinds, where users can interact with these works and leave their comments. Both artists and users will create their accounts where they can upload a profile picture and information about themselves.
 
- - The project is published using Heroku through this link you can visit us
 
  ![Homepage](/assets/images/)
 
- Visit the site! [name site](https://heroku)
+ Visit the site! [Instartist](https://heroku)
 
 
 # Table of Contents
@@ -21,7 +20,6 @@ Instartist is a social media application to virtually expose works created by ar
 [Usage](#Usage)
 
 [License](#License)
-
 
 [Technologies](#Technologies)
 
@@ -69,7 +67,6 @@ NONE
 - GITHUB
 - HEROHU
 
-
     
 # Comtribuitors
 - DARIUS WRIGHT
@@ -79,17 +76,22 @@ NONE
 - CLAUDIA LAY
 
 
-
 # Questions
 
-  If you have questions about the project, below you can find ways to answer them, either by visiting my highub or contacting me by email.
+  If you have questions about the project, below you can find ways to answer them, either by visiting our hithub or contacting us by email.
   
-  Link to  Github: 
- [Annia](https://github.com/avdiaz)
- [Christopher](https://github.com/christopherConcannon) 
- [Darius](https://github.com/DariusJWright)
- [Demario](https://github.com/DWill1440)
+  Link to  Github:
+  - [Darius](https://github.com/DariusJWright)
+  - [Demario](https://github.com/DWill1440)
+  - [Annia](https://github.com/avdiaz)
+  - [Christopher](https://github.com/christopherConcannon)
+  - [Claudia]()
 
-  
-  Email acount: [annia.valdes@gmail.com](mailto:annia.valdes@gmail.com)
-    
+ 
+  Email acount:
+- Darius:
+- Demario: [dwill2thin@gmail.com](mailto:dwill2thin@gmail.com)
+- Annia: [annia.valdes@gmail.com](mailto:annia.valdes@gmail.com)
+- Christopher: [cmcon@yahoo.com](mailito:cmcon@yahoo.com)
+- Claudia: [claudialay41@gmail.com](malito:claudialay41@gmail.com)
+- 
