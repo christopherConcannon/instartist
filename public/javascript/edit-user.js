@@ -1,33 +1,36 @@
 async function updateFormHandler(event) {
-  event.preventDefault();
+	event.preventDefault();
 
+	const id = window.location.toString().split('/')[
+		window.location.toString().split('/').length - 1
+	];
 
-  const id = window.location.toString().split('/')[
-    window.location.toString().split('/').length - 1
-  ];
-  
-  const bio = document.querySelector('#bio').value.trim();
-  const medium = document.querySelector('#medium').value.trim();
-  const interests = document.querySelector('#interests').value.trim();
+	const form = document.querySelector('#udpate-user-form');
 
-  const response = await fetch(`/api/users/${id}`, {
-    method: 'PUT',
-    body: JSON.stringify({
-      bio,
-      medium,
-      interests
-    }),
-    headers: { 'Content-Type': 'application/json' }
-  });
-  // console.log(response);
+	const formData = new FormData(form);
 
-  // check the response status
-  if (response.ok) {
-    document.location.replace('/dashboard');
-  } else {
-    alert(response.statusText);
-  }
+	const spinnerWrapper = document.querySelector('.spinner-wrapper');
+	const spinner = document.querySelector('#spinner');
 
+	form.classList.add('d-none');
+	spinnerWrapper.classList.replace('d-none', 'd-flex');
+	spinner.classList.remove('d-none');
+
+	const response = await fetch(`/api/users/${id}`, {
+		method : 'PUT',
+		body   : formData
+	});
+
+	// check the response status
+	if (response.ok) {
+		document.location.replace('/dashboard');
+	} else {
+		alert(response.statusText);
+	}
+
+	spinnerWrapper.classList.add('d-none');
+	spinner.classList.add('d-none');
+	form.classList.remove('d-none');
 }
 
-document.querySelector('#udpate-form').addEventListener('submit', updateFormHandler);
+document.querySelector('#udpate-user-form').addEventListener('submit', updateFormHandler);

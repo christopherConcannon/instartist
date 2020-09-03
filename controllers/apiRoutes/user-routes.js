@@ -81,15 +81,16 @@ router.post('/', imgUpload.single('user-img'), (req, res) => {
 });
 
 // PUT /api/users/1
-router.put('/:id', withAuth, (req, res) => {
+router.put('/:id', withAuth, imgUpload.single('user-img'), (req, res) => {
 	User.update(
 		{
 			bio       : req.body.bio,
 			medium    : req.body.medium,
-			interests : req.body.interests
+      interests : req.body.interests,
+      user_img_url : req.file.path
 		},
 		{
-			individualHooks : false,
+			// individualHooks : false,
 			where           : {
 				id : req.params.id
 			}
