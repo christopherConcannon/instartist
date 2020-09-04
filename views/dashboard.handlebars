@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="card mb-12" style="fluid-width: 540px;">
+  <div id="artist-meta-card" class="card" style="fluid-width: 540px;">
     <div class="row no-gutters">
       <div class="col-md-4 d-flex justify-content-center align-items-center">
         {{!-- User Image/Maybe Random Image of Art --}}
@@ -22,7 +22,7 @@
             <p class="card-text">Interests: {{user.interests}}</p>
           {{/if}}
           <a href="/dashboard/new" class="btn btn-dark">Upload Work</a>
-          <a href="/dashboard/user/{{user.id}}" class="btn btn-primary">Update User</a>
+          <a href="/dashboard/user/{{user.id}}" class="btn btn-secondary">Update User</a>
         </div>
       </div>
     </div>
@@ -31,7 +31,7 @@
 
 {{#if user.posts.length}}
 
-  <h1 class="font-weight-light text-center text-lg-left mt-4 mb-0">Your Work</h1>
+  <h1 class="font-weight-light text-center text-lg-left mb-0">Your Work</h1>
 
     <hr class="mt-2 mb-5">
 

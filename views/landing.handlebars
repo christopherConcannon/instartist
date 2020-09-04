@@ -1,7 +1,7 @@
     <header class= "container-fluid banner landing">
       <div class="row">
         <div class="col-md-12"> 
-          <nav class="navbar navbar-md">
+          {{!-- <nav class="navbar navbar-md">
             <div class="navbar-brand">INSTARTIST</div> 
             <ul class="nav">
               <li class="nav-item">
@@ -14,10 +14,37 @@
                 <a href="/signup" class="nav-link">SIGN UP</a>
               </li>
             </ul>
-          </nav>   
+          </nav>    --}}
+          <nav class="navbar navbar-expand-lg navbar-light">
+            <h2 class="navbar-brand" href="/">Instartist</h2>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+              aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              {{!-- <ul class="navbar-nav ml-auto"> --}}
+                <ul class="nav navbar-nav ml-auto">
+                <li class="nav-item">
+                  <a class="nav-link" href="/dashboard">Showroom</a>
+                </li>
+                {{#if loggedIn}}
+                <li class="nav-item">
+                  <a id="logout" class="nav-link" href="#">Logout</a>
+                </li>
+                {{else}}
+                <li class="nav-item">
+                  <a class="nav-link" href="/signup">Signup</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/login">Login</a>
+                </li>
+                {{/if}}
+              </ul>
+            </div>
+          </nav>
         </div> 
-      <div class="col-md-6 offset-md-3 info">
-        <h1 class="text-center">INSTARTIST</h1>
+      <div class="col-md-6 col-8 offset-md-3 offset-2 info">
+        {{!-- <h1 class="text-center">INSTARTIST</h1> --}}
         <p class="text-center">
             Welcome! Login to let your favorite artist know how inspired you are by their latest masterpiece. 
             Or Sign Up and allow your greatest creations to be displayed in our Community Showroom to be viewed by our members and guests!
@@ -27,7 +54,4 @@
     </div>
     </header> 
 
-  {{!-- <footer class="text-center mt-3 flex-shrink-0">crud studs &copy;2020</footer> --}}
-    {{!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script> --}}
+ 

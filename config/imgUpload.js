@@ -3,9 +3,9 @@ const { CloudinaryStorage } = require('multer-storage-cloudinary');
 const multer = require('multer');
 
 // config using heroku cloudinary accout url
-cloudinary.config({
-  CLOUDINARY_URL: process.env.CLOUDINARY_URL
-})
+// cloudinary.config({
+//   CLOUDINARY_URL: process.env.CLOUDINARY_URL
+// })
 
 // heroku config vars are lowercase!
 // cloudinary.config({
@@ -15,11 +15,11 @@ cloudinary.config({
 // });
 
 // // local config
-// cloudinary.config({
-//   cloud_name: process.env.CLOUD_NAME,
-//   api_key: process.env.API_KEY,
-//   api_secret: process.env.API_SECRET
-// });
+cloudinary.config({
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.API_KEY,
+  api_secret: process.env.API_SECRET
+});
 
 const storage = new CloudinaryStorage({
   cloudinary: cloudinary,

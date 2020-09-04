@@ -1,10 +1,11 @@
-<div class="container">
+<div class="container parent-container-h-center">
   <div class="spinner-wrapper d-none flex-column align-items-center justify-content-center mt-5">
     <div id="spinner" class="spinner-grow text-warning d-none mt-5" role="status">
       <span class="sr-only">Loading...</span>
   </div>
   </div>
-  <form id="signup-form">
+  <form id="signup-form" class="global-form">
+    <h2>Please take a moment to join us</h2>
     <div class="form-group">
       <label for="username-signup">Username</label>
       <input type="text" class="form-control" id="username-signup" name="username" required>
@@ -23,7 +24,7 @@
       <input type="file" class="form-control-file" id="user-img" name="user-img" accept="images/*" required> 
     </div>
 
-    <button type="button" class="btn btn-primary" id="show-long-form">Add Additional Info?</button>
+    <button type="button" class="btn btn-secondary" id="show-long-form">Add Additional Info?</button>
 
     <div id="long-form">
       <div class="form-group">

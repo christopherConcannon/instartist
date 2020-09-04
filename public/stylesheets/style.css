@@ -1,9 +1,28 @@
+:root {
+	--main: #fffbf8;
+	/* --main: #fff7ef; */
+	/* --main: #DCE0E3; */
+	/* --main: #E6EAED; */
+	--accent: rgba(238, 234, 234, 0.781)
+	 --tertiary: #788585;
+	/* --light: #9b928f;
+	--light-dark: #6f6866;
+	--dark: #38302e;
+	--border-radius: 0.3rem;
+	--spacing-one: calc(1rem * 0.25);
+	--spacing-two: calc(1rem * 0.5);
+	--spacing-three: 1rem;
+	--spacing-four: calc(1rem * 1.5);
+	--spacing-five: calc(1rem * 3);  */
+}
+
 /* LANDING PAGE */
 #landing-page body{
 	margin: 0;
 	padding:0;
-	font-family: 'Playfair Display SC', serif;
-	color: #fff;
+	/* font-family: 'Playfair Display SC', serif; */
+  color: #fff;
+  font-family: 'Inter', sans-serif;
 
 }
 
@@ -16,7 +35,7 @@
 #landing-page .banner{
 	height: 100vh;
 	width: 100%;	
-	font-family: 'Playfair Display SC', serif;
+	/* font-family: 'Playfair Display SC', serif; */
 
 }
 #landing-page .navbar{
@@ -34,33 +53,40 @@
 #landing-page .nav li a{
 	color:rgb(78, 72, 72);
 	font-size:1.1em;
-	font-family: 'Abril Fatface', cursive;
+  /* font-family: 'Abril Fatface', cursive; */
+  font-family: 'Playfair Display SC', serif;
+  text-transform: uppercase;
 }
 #landing-page .banner .info{
 	margin-top: 15%;
 	transform: translateY(-15%);
-	background: rgba(238, 234, 234, 0.781);	
-	border-radius: 10px;
+	background: var(--accent);	
+  border-radius: 10px;
+  padding: 1rem;
+  /* additional padding on top for possible logo */
+  padding-top: 4rem;
 }
 #landing-page .banner .info h1{
 	margin-top: 10px;
-	font-size: 2.5em;
+	font-size: 1.5em;
 	color: rgb(71, 71, 68);
 	letter-spacing: 2px;	
 }
 #landing-page .banner .info p{
-	font-family: 'Times New Roman', Times, serif;
-	font-size: 1.5em;
-	color: rgb(52, 65, 83);	
-	
+	/* font-family: 'Times New Roman', Times, serif; */
+	font-size: 1.2em;
+  color: rgb(52, 65, 83);	
+  font-family: 'Inter', sans-serif;	
 }
-#landing-page .banner .info a{
+
+#landing-page .banner .info a {
+  /* centering view showroom button */
 	margin-left: 50%;
 	transform: translateX(-50%);
 	color: rgb(238, 238, 232);
 	background: rgba(80, 83, 85, 0.527);
 	padding: 10px 20px;
-	font-size:1.5em;
+	font-size:1em;
 	margin-bottom: 10px;
 }
 #landing-page .banner .info a:hover{
@@ -77,6 +103,41 @@
 	background-repeat: no-repeat;
 } */
 
+/* INNER PAGES */
+
+body {
+  background-color: var(--main);
+  font-family: 'Inter', sans-serif;
+}
+
+.navbar-brand {
+  color: rgb(66, 58, 58);
+  font-family: 'Playfair Display SC', serif;
+  text-transform: uppercase;
+}
+
+/* SHOWROOM */
+.work-title {
+  margin-top: 4rem;
+}
+
+/* DASHBOARD */
+/* DASHBOARD ARTIST META CARD */
+.card {
+  margin: 5rem 0;
+  border-radius: 1.5rem!important;
+  background-color: #eeeeee;
+}
+
+#user-avatar, #user-no-avatar {
+  width: 20vh;
+  height: 20vh;
+  border-radius: 50%;
+}
+
+/* IMAGE STYLES */
+
+/* gallery grid images */
 .cust-img-thumb {
   position: relative;
   width: 100%;
@@ -88,15 +149,12 @@
   /* height: 40vh; */
 }
 
+/* large image on single post page */
 .single-post-img {
   height: 80vh;
 }
 
-#user-avatar, #user-no-avatar {
-  width: 20vh;
-  height: 20vh;
-  border-radius: 50%;
-}
+
 
 
 /* spinner */
@@ -106,9 +164,37 @@
   height: 5rem;
 }
 
+.parent-container-h-center {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+
 /* signup form */
+.global-form {
+  margin: 5rem 0;
+}
+
+.global-form h2{
+  font-size: 1.3rem;
+  margin-bottom: 2rem;
+}
+
 #long-form {
   display: none;
+}
+
+/* login form */
+
+
+
+/* BUTTON STYLES */
+
+
+/* FORM STYLES */
+.form-control {
+  border-radius: .5rem;
 }
 
 
@@ -136,3 +222,38 @@ footer {
     visibility: visible;
   }
 } */
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) { 
+  
+ }
+
+@media screen and (min-width: 768px ) {
+  #landing-page .banner .info h1 {
+    font-size: 2.5em;
+  }
+
+  #landing-page .banner .info p{
+    font-size: 1.5em;
+  }
+
+  #landing-page .banner .info a {
+    font-size:1.5em;
+  }
+}
+
+
+/* // Extra small devices (portrait phones, less than 576px)
+// No media query for `xs` since this is the default in Bootstrap
+
+// Small devices (landscape phones, 576px and up)
+@media (min-width: 576px) { ... }
+
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) { ... }
+
+// Large devices (desktops, 992px and up)
+@media (min-width: 992px) { ... }
+
+// Extra large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) { ... } */

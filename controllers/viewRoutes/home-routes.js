@@ -3,13 +3,21 @@ const { Post, User, Comment } = require('../../models');
 
 // '/' landing page
 router.get('/', (req, res) => {
-  res.render('landing', {layout: 'landing'})
-})
+	res.render('landing', { layout: 'landing', loggedIn: req.session.loggedIn });
+});
 
 // '/homepage' homepage -- display index of all posts
 router.get('/homepage', (req, res) => {
 	Post.findAll({
-		attributes :  [ 'id', 'title','dimension','description','media','img_url', 'created_at' ],
+		attributes : [
+			'id',
+			'title',
+			'dimension',
+			'description',
+			'media',
+			'img_url',
+			'created_at'
+		],
 		order      : [ [ 'created_at', 'DESC' ] ],
 		include    : [
 			{
@@ -30,7 +38,7 @@ router.get('/homepage', (req, res) => {
 			const posts = dbPostData.map((post) => post.get({ plain: true }));
 			res.render('homepage', {
 				posts,
-        loggedIn : req.session.loggedIn
+				loggedIn : req.session.loggedIn
 			});
 		})
 		.catch((err) => {
@@ -45,7 +53,15 @@ router.get('/post/:id', (req, res) => {
 		where      : {
 			id : req.params.id
 		},
-		attributes :[ 'id', 'title','dimension','description','media','img_url', 'created_at' ],
+		attributes : [
+			'id',
+			'title',
+			'dimension',
+			'description',
+			'media',
+			'img_url',
+			'created_at'
+		],
 		include    : [
 			{
 				model      : Comment,
@@ -65,11 +81,11 @@ router.get('/post/:id', (req, res) => {
 			if (!dbPostData) {
 				res.status(404).json({ message: 'No post found with this id' });
 				return;
-      }
+			}
 
 			// serialize the data
 			const post = dbPostData.get({ plain: true });
-      console.log(post);
+			console.log(post);
 
 			// pass data to template
 			res.render('single-post', {
