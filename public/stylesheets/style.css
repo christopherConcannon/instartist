@@ -3,7 +3,7 @@
 	/* --main: #fff7ef; */
 	/* --main: #DCE0E3; */
 	/* --main: #E6EAED; */
-	--accent: rgba(238, 234, 234, 0.781)
+	--accent: rgba(238, 234, 234, 0.781);
 	 --tertiary: #788585;
 	/* --light: #9b928f;
 	--light-dark: #6f6866;
@@ -168,6 +168,13 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: center;
+}
+
+/* flash messages */
+.alert-error, .alert-success {
+  color: #680129;
+    background-color:#a09197;
+    border-color: #805e6b;
 }
 
 
