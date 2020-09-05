@@ -7,7 +7,7 @@ cloudinary.config({
   CLOUDINARY_URL: process.env.CLOUDINARY_URL
 })
 
-// heroku config vars are lowercase!
+// heroku config vars are lowercase!!!
 // cloudinary.config({
 //   cloud_name: process.env.cloud_name,
 //   api_key: process.env.api_key,
