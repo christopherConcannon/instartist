@@ -198,16 +198,17 @@ router.put('/:id', withAuth, imgUpload.single('user-img'), (req, res) => {
 
 // DELETE /api/users/1
 router.delete('/:id', withAuth, (req, res) => {
-	Comment.destroy({
-		where : {
-			user_id : req.params.id
-		}
-	}).then(() => {
-		Post.destroy({
-			where : {
-				user_id : req.params.id
-			}
-		}).then(() => {
+  // KEEP IF NEEDED UNTIL CONFIDENT ASSOCIATIONS DON'T MAKE USER DELETE TROUBLESOME
+	// Comment.destroy({
+	// 	where : {
+	// 		user_id : req.params.id
+	// 	}
+	// }).then(() => {
+	// 	Post.destroy({
+	// 		where : {
+	// 			user_id : req.params.id
+	// 		}
+	// 	}).then(() => {
 			User.destroy({
 				where : {
 					id : req.params.id
@@ -224,8 +225,8 @@ router.delete('/:id', withAuth, (req, res) => {
 					console.log(err);
 					res.status(500).json(err);
 				});
-		});
-	});
+	// 	});
+	// });
 });
 
 
