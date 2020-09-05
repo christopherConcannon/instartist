@@ -51,7 +51,7 @@ User.init(
     },
     user_img_url: { // isUrl: true,   ver q va a guardar
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
 			validate: {
 				isUrl: true
 			}

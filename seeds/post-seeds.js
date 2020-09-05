@@ -1,5 +1,8 @@
 const { Post } = require('../models');
 
+// if needed
+// 'https://source.unsplash.com/1080x960/?art'
+
 const postdata = [
 	{
 		title       : 'Donec posuere metus vitae ipsum.',
@@ -7,7 +10,7 @@ const postdata = [
 		dimension   : '6x8',
 		description : 'Integer pede justo',
 		media       : 'Morbi non quam',
-		img_url     : 'https://res.cloudinary.com/hvs67cwpo/image/upload/v1599186565/works/gwkyugxikklkdbfwvpxw.jpg',
+		img_url     : 'https://res.cloudinary.com/hvs67cwpo/image/upload/v1599177098/works/zag5gprhlrmdek0p5gez.jpg',
 		user_id     : 10
 	},
 	{
@@ -16,7 +19,7 @@ const postdata = [
 		dimension   : '3x9',
 		description : 'Donec diam neque, vestibulum ege',
 		media       : 'Nunc purus.',
-		img_url     : 'https://source.unsplash.com/1080x960/?art',
+		img_url     : 'https://res.cloudinary.com/hvs67cwpo/image/upload/v1599177075/works/mhvpp0p94opbscodph8n.jpg',
 		user_id     : 8
 	},
 	{
@@ -26,7 +29,7 @@ const postdata = [
 		dimension   : '9x7',
 		description : 'Nunc purus.',
 		media       : 'Integer pede justo',
-		img_url     : 'https://source.unsplash.com/1080x960/?art',
+		img_url     : 'https://res.cloudinary.com/hvs67cwpo/image/upload/v1599177040/works/xsaht1anmot0vtsm9ogq.jpg',
 		user_id     : 1
 	},
 	{
@@ -35,7 +38,7 @@ const postdata = [
 		dimension   : '4x7',
 		description : 'Integer pede justo',
 		media       : 'Nunc purus.',
-		img_url     : 'https://source.unsplash.com/1080x960/?art',
+		img_url     : 'https://res.cloudinary.com/hvs67cwpo/image/upload/v1599176147/works/re7yv38nmw8kq3wiiz7v.jpg',
 		user_id     : 4
 	},
 	{
@@ -44,7 +47,7 @@ const postdata = [
 		dimension   : '3x8',
 		description : 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.',
 		media       : 'Integer pede justo',
-		img_url     : 'https://source.unsplash.com/1080x960/?art',
+		img_url     : 'https://res.cloudinary.com/hvs67cwpo/image/upload/v1599175794/works/wmljhjjlv2n4nyfg5cdh.jpg',
 		user_id     : 7
 	},
 	{
@@ -53,7 +56,7 @@ const postdata = [
 		dimension   : '9x7',
 		description : 'Integer pede justo',
 		media       : 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.',
-		img_url     : 'https://source.unsplash.com/1080x960/?art',
+		img_url     : 'https://res.cloudinary.com/hvs67cwpo/image/upload/v1599175064/works/aen2w8zb79ewu0j9zqa7.jpg',
 		user_id     : 4
 	},
 	{
@@ -62,7 +65,7 @@ const postdata = [
 		dimension   : '8x9',
 		description : 'Integer pede justo',
 		media       : 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.',
-		img_url     : 'https://source.unsplash.com/1080x960/?art',
+		img_url     : 'https://res.cloudinary.com/hvs67cwpo/image/upload/v1599174916/works/dyassx1ex0kybff8oxlg.jpg',
 		user_id     : 1
 	},
 	{
@@ -71,7 +74,7 @@ const postdata = [
 		dimension   : '6x4',
 		description : 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.',
 		media       : 'Integer pede justo',
-		img_url     : 'https://source.unsplash.com/1080x960/?art',
+		img_url     : 'https://res.cloudinary.com/hvs67cwpo/image/upload/v1599166773/works/gh8jnbgog6kokk6d8mir.jpg',
 		user_id     : 1
 	},
 	{
@@ -80,7 +83,7 @@ const postdata = [
 		dimension   : '7x3',
 		description : 'Integer pede justo',
 		media       : 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.',
-		img_url     : 'https://source.unsplash.com/1080x960/?art',
+		img_url     : 'https://res.cloudinary.com/hvs67cwpo/image/upload/v1599166654/works/svkp2cqdrbpemkzqb35m.jpg',
 		user_id     : 9
 	},
 	{
@@ -89,7 +92,7 @@ const postdata = [
 		dimension   : '4x8',
 		description : 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.',
 		media       : 'Integer pede justo',
-		img_url     : 'https://source.unsplash.com/1080x960/?art',
+		img_url     : 'https://res.cloudinary.com/hvs67cwpo/image/upload/v1599164286/works/yozipetcdxwc9zvxnxwm.jpg',
 		user_id     : 5
 	},
 	{
@@ -98,7 +101,7 @@ const postdata = [
 		dimension   : '3x9',
 		description : 'Morbi non quam nec',
 		media       : 'Integer pede justo',
-		img_url     : 'https://source.unsplash.com/1080x960/?art',
+		img_url     : 'https://res.cloudinary.com/hvs67cwpo/image/upload/v1599176762/works/rchteqaatt9z4iunh1lz.jpg',
 		user_id     : 3
 	},
 	{
