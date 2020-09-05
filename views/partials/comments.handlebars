@@ -1,9 +1,17 @@
 <div class="comments card">
-  <div class="card-header bg-dark"></div>
+  <div class="card-header bg-dark text-light">What people are saying...</div>
   <div class="card-body">
   {{#each this}}
-    <p class="mb-3">{{comment_text}}</p>
-    <p class="mb-3">-- {{user.username}}, {{format_date created_at}}</p>
+    <div class="media mb-5">
+      <img class="rounded-circle mr-3" src="{{user.user_img_url}}" alt="">
+      <div class="media-body">
+        <p class="mb-3 font-italic">
+          posted by <span class="comment-author">{{user.username}}</span> on 
+          {{format_date created_at}}
+        </p>
+        <p class="mb-3">{{comment_text}}</p>
+      </div>
+    </div>
   {{/each}}
   </div>
 </div>

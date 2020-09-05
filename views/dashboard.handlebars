@@ -12,15 +12,18 @@
       <div class="col-md-8">
         <div class="card-body">
           <h5 class="card-title">{{user.username}}</h5>
-          {{#if user.bio}}
-            <p class="card-text">Bio: {{user.bio}}</p>
-          {{/if}}
-          {{#if user.medium}}
-            <p class="card-text">Preferred medium: {{user.medium}}</p>
-          {{/if}}
-          {{#if user.interests}}
-            <p class="card-text">Interests: {{user.interests}}</p>
-          {{/if}}
+          <div class="card-meta-content">
+            {{#if user.bio}}
+              <p class="card-text">Bio: {{user.bio}}</p>
+            {{/if}}
+            {{#if user.medium}}
+              <p class="card-text">Preferred medium: {{user.medium}}</p>
+            {{/if}}
+            {{#if user.interests}}
+              <p class="card-text">Interests: {{user.interests}}</p>
+            {{/if}}
+          </div>
+          
           <a href="/dashboard/new" class="btn btn-dark">Upload Work</a>
           <a href="/dashboard/user/{{user.id}}" class="btn btn-secondary">Update User</a>
         </div>
