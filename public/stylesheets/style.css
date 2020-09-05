@@ -255,12 +255,12 @@ body {
 footer {
   visibility: hidden;
 }
-/* 
+
 @media screen and (min-width: 768px) {
   footer {
     visibility: visible;
   }
-} */
+}
 
 /* Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) { 
