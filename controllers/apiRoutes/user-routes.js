@@ -60,6 +60,7 @@ router.get('/:id', (req, res) => {
 
 // POST /api/users -- create user on signup
 router.post('/', imgUpload.single('user-img'), (req, res) => {
+  // check for unique username
 	User.findOne({
 		where : {
       username: req.body.username
