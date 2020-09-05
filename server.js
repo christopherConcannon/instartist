@@ -7,7 +7,6 @@ const PORT = process.env.PORT || 3001;
 const exphbs = require('express-handlebars');
 const helpers = require('./utils/helpers');
 const hbs = exphbs.create({ helpers });
-const flash = require('connect-flash');
 const session = require("express-session");
 const SequelizeStore = require("connect-session-sequelize")(session.Store);
 
@@ -15,7 +14,7 @@ const SequelizeStore = require("connect-session-sequelize")(session.Store);
 // set up express session and connect session to Sequelize db
 const sess = {
   secret: process.env.SESS_SECRET,
-  cookie: {maxAge: 3600000},
+  cookie: {},
   resave: false,
   saveUninitialized: true,
   store: new SequelizeStore({
@@ -28,14 +27,8 @@ app.use(session(sess));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(flash());
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
-app.use((req, res, next) => {
-  res.locals.error =  req.flash('error');
-  res.locals.success = req.flash('success');
-  next();
-})
 app.use(routes);
 
 // sequelize.sync({ force: true }).then(() => {

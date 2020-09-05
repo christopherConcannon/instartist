@@ -1,12 +1,12 @@
 const router = require('express').Router();
 const { Post, User, Comment } = require('../../models');
 
-// '/' landing page
+// '/' homepage -- display index of all posts
 router.get('/', (req, res) => {
-  res.render('landing', {layout: 'landing'})
-})
-
-// '/homepage' homepage -- display index of all posts
+	res.render('landing', {
+		layout: "landing"
+	})
+});
 router.get('/homepage', (req, res) => {
 	Post.findAll({
 		attributes :  [ 'id', 'title','dimension','description','media','img_url', 'created_at' ],

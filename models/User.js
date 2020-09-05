@@ -48,13 +48,6 @@ User.init(
     interests: {
       type: DataTypes.STRING,
       allowNull: true
-    },
-    user_img_url: { // isUrl: true,   ver q va a guardar
-      type: DataTypes.STRING,
-      allowNull: false,
-			validate: {
-				isUrl: true
-			}
     }
 	},
 	{
