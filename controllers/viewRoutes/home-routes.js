@@ -55,7 +55,8 @@ router.get('/post/:id', (req, res) => {
 		},
 		attributes : [
 			'id',
-			'title',
+      'title',
+      'artist_name',
 			'dimension',
 			'description',
 			'media',

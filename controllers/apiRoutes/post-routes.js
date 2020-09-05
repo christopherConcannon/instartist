@@ -9,7 +9,8 @@ router.post('/', withAuth, imgUpload.single('work-img'), (req, res) => {
 	console.log(req.file);
 	console.log(req.body);
 	Post.create({
-		title       : req.body.title,
+    title       : req.body.title,
+    artist_name : req.body.artist,
 		dimension   : req.body.dimensions,
 		description : req.body.description,
 		media       : req.body.media,
@@ -21,7 +22,7 @@ router.post('/', withAuth, imgUpload.single('work-img'), (req, res) => {
 			res.json(dbPostData);
 		})
 		.catch((err) => {
-			console.log(err);
+			// console.log(err);
 			req.flash(
 				'error',
 				'There was a problem, your new work could not be added. Please try again later.'
@@ -34,7 +35,8 @@ router.post('/', withAuth, imgUpload.single('work-img'), (req, res) => {
 router.put('/:id', withAuth, imgUpload.single('work-img'), (req, res) => {
 	Post.update(
 		{
-			title       : req.body.title,
+      title       : req.body.title,
+      artist_name : req.body.artist,
 			dimension   : req.body.dimensions,
 			description : req.body.description,
 			media       : req.body.media,
