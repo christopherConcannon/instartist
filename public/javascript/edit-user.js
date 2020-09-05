@@ -1,5 +1,3 @@
-
-
 async function updateFormHandler(event) {
   event.preventDefault();
 

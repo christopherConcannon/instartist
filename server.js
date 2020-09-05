@@ -39,6 +39,11 @@ app.use((req, res, next) => {
 app.use(routes);
 
 // sequelize.sync({ force: true }).then(() => {
-sequelize.sync({ force: false}).then(() => {
-  app.listen(PORT, () => console.log(`Now listening on PORT ${PORT}`));
+sequelize.sync({ force: false }).then(() => {
+  app.listen(PORT, () => {
+    console.log(`Now listening on PORT ${PORT}`);
+    console.log('======================================');
+    console.log('======================================');
+    console.log('======================================');
+  });
 });

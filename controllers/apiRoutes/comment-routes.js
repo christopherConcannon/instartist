@@ -3,7 +3,7 @@ const { Comment } = require('../../models');
 const withAuth = require('../../utils/auth');
 
 // GET /api/comments
-router.get('/', withAuth, (req, res) => {
+router.get('/', (req, res) => {
 	Comment.findAll({
 		attributes : [ 'id', 'comment_text', 'user_id', 'post_id' ]
 	})
@@ -35,18 +35,42 @@ router.post('/', withAuth, (req, res) => {
 	}
 });
 
+// UPDATE /api/comments/1
+router.put('/:id', withAuth, (req, res) => {
+  Comment.update({
+    comment_text: req.body.comment_text
+  },
+  {
+    where: {
+      id: req.params.id
+    }
+  })
+    .then(dbCommentData => {
+      if (!dbCommentData) {
+        res.status(404).json({ message: "No comment found with this id"});
+        return;
+      }
+      res.json(dbCommentData);
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
+    });
+});
+
 // DELETE /api/comments/1
-router.delete('/:id', withAuth, (req, res) => {
-	Comment.destroy({
+router.delete('/:id', (req, res) => {
+  Comment.destroy({
 		where : {
 			id : req.params.id
 		}
 	})
 		.then((dbCommentData) => {
+      console.log('dbcommentdata =>>>', dbCommentData);
 			if (!dbCommentData) {
 				res.status(400).json({ message: 'No comment found with this id' });
 				return;
-			}
+      }
 			res.json(dbCommentData);
 		})
 		.catch((err) => {

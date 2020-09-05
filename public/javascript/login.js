@@ -20,7 +20,7 @@ async function loginFormHandler(event) {
 			document.location.replace('/dashboard');
 			// document.location.replace('/');
 		} else {
-      // alert(response.statusText);
+      alert('Username not found!');
       return;
 		}
 	}
