@@ -25,10 +25,13 @@ async function signupFormHandler(event) {
 	});
 
 	if (response.ok) {
+    console.log(response, 'ok')
 		document.location.replace('/dashboard');
 		// document.location.replace('/');
 	} else {
-		alert(response.statusText);
+    console.log(response, 'not ok')
+    // alert(response.statusText);
+    document.location.replace('/signup');
 	}
 
 	// spinnerWrapper.classList.add('d-none');

@@ -60,38 +60,57 @@ router.get('/:id', (req, res) => {
 
 // POST /api/users -- create user on signup
 router.post('/', imgUpload.single('user-img'), (req, res) => {
-	User.create({
-		username  : req.body.username,
-		email     : req.body.email,
-		password  : req.body.password,
-		bio       : req.body.bio,
-		medium    : req.body.medium,
-    interests : req.body.interests,
-    user_img_url : req.file.path
-	}).then((dbUserData) => {
-		req.session.save(() => {
-			req.session.user_id = dbUserData.id;
-			req.session.username = dbUserData.username;
-			req.session.loggedIn = true;
+	User.findOne({
+		where : {
+      username: req.body.username
+    }
+  })
+  .then((dbUserData) => {
+    if(dbUserData) {
+      console.log('Username already used');
+      req.flash('error', `Sorry, that username already exists`);
+      res.status(409).json({ message: 'Username already exists'});
+      return;
+    }
+    User.create({
+      username     : req.body.username,
+      email        : req.body.email,
+      password     : req.body.password,
+      bio          : req.body.bio,
+      medium       : req.body.medium,
+      interests    : req.body.interests,
+      user_img_url : req.file.path
+    }).then((dbUserData) => {
+      req.session.save(() => {
+        req.session.user_id = dbUserData.id;
+        req.session.username = dbUserData.username;
+        req.session.loggedIn = true;
+  
+        req.flash('success', `Hi ${req.session.username}, welcome to Instartist!`);
+        res.json(dbUserData);
+      });
+    });
+  })
+  .catch((err) => {
+    console.log(err);
+    res.status(500).json(err);
+  });
+  
 
-			req.flash('success', `Hi ${req.session.username}, welcome to Instartist!`);
-			res.json(dbUserData);
-		});
-	});
 });
 
 // PUT /api/users/1
 router.put('/:id', withAuth, imgUpload.single('user-img'), (req, res) => {
 	User.update(
 		{
-			bio       : req.body.bio,
-			medium    : req.body.medium,
-      interests : req.body.interests,
-      user_img_url : req.file.path
+			bio          : req.body.bio,
+			medium       : req.body.medium,
+			interests    : req.body.interests,
+			user_img_url : req.file.path
 		},
 		{
 			// individualHooks : false,
-			where           : {
+			where : {
 				id : req.params.id
 			}
 		}
@@ -114,7 +133,7 @@ router.put('/:id', withAuth, imgUpload.single('user-img'), (req, res) => {
 router.delete('/:id', withAuth, (req, res) => {
 	Comment.destroy({
 		where : {
-      user_id : req.params.id
+			user_id : req.params.id
 		}
 	}).then(() => {
 		Post.destroy({
@@ -177,11 +196,14 @@ router.post('/login', (req, res) => {
 		// initiate creation of session and grab values for session variables from db
 		req.session.save(() => {
 			// declare session variables
-      req.session.user_id = dbUserData.id;
-      req.session.username = dbUserData.username;
+			req.session.user_id = dbUserData.id;
+			req.session.username = dbUserData.username;
 			req.session.loggedIn = true;
 
-			req.flash('success', `Hi ${req.session.username}, welcome back to Instartist!`);
+			req.flash(
+				'success',
+				`Hi ${req.session.username}, welcome back to Instartist!`
+			);
 			res.json({ user: dbUserData, message: 'You are now logged in!' });
 		});
 	});
