@@ -134,6 +134,7 @@ body {
   width: 20vh;
   height: 20vh;
   border-radius: 50%;
+  margin-top: 2rem;
 }
 
 /* IMAGE STYLES */
@@ -278,6 +279,10 @@ footer {
 
   #landing-page .banner .info a {
     font-size:1.5em;
+  }
+
+  #user-avatar, #user-no-avatar {
+    margin-top: 0;
   }
 }
 
