@@ -4,6 +4,7 @@ const seedComments = require('./comment-seeds');
 
 const sequelize = require('../config/connection');
 
+// NOTE -- this appears to sync the models as well so running $ node seeds/index.js is sufficient to update models when they've been changed
 const seedAll = async () => {
   await sequelize.sync({ force: true });
   console.log('--------------');
