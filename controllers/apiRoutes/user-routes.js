@@ -189,14 +189,11 @@ router.put('/:id', withAuth, imgUpload.single('user-img'), (req, res) => {
 			});
 	}
 });
-// do catches ever go out here?
-// .catch((err) => {
-//   console.log(err);
-//   res.status(500).json(err);
-// });
 
 // DELETE /api/users/1
 router.delete('/:id', withAuth, (req, res) => {
+  // TODO -- DELETE USERS PICTURES FROM CLOUDINARY ON USER DELETE
+
   // KEEP IF NEEDED UNTIL CONFIDENT ASSOCIATIONS DON'T MAKE USER DELETE TROUBLESOME
 	// Comment.destroy({
 	// 	where : {
