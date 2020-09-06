@@ -54,7 +54,8 @@ router.get('/edit/:id', withAuth, (req, res) => {
 		},
 		attributes : [
 			'id',
-			'title',
+      'title',
+      'artist_name',
 			'dimension',
 			'description',
 			'media',
