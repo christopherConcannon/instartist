@@ -2,7 +2,6 @@ const router = require('express').Router();
 const { Post, User, Comment } = require('../../models');
 const withAuth = require('../../utils/auth');
 const imgUpload = require('../../config/imgUpload');
-const cloudinary = require('cloudinary').v2;
 
 // POST /api/posts
 // router.post('/', withAuth, (req, res) => {
@@ -10,12 +9,12 @@ router.post('/', withAuth, imgUpload.single('work-img'), (req, res) => {
 	console.log(req.file);
 	console.log(req.body);
 	Post.create({
-		title       : req.body.title,
+    title       : req.body.title,
+    artist_name : req.body.artist,
 		dimension   : req.body.dimensions,
 		description : req.body.description,
 		media       : req.body.media,
 		img_url     : req.file.path,
-		public_id   : req.file.filename,
 		user_id     : req.session.user_id
 	})
 		.then((dbPostData) => {
@@ -23,7 +22,7 @@ router.post('/', withAuth, imgUpload.single('work-img'), (req, res) => {
 			res.json(dbPostData);
 		})
 		.catch((err) => {
-			console.log(err);
+			// console.log(err);
 			req.flash(
 				'error',
 				'There was a problem, your new work could not be added. Please try again later.'

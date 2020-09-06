@@ -1,4 +1,4 @@
-async function newFormHandler(event) {
+async function newPostFormHandler(event) {
 	event.preventDefault();
 
 	const form = document.querySelector('#new-post-form');
@@ -29,4 +29,4 @@ async function newFormHandler(event) {
 	// form.classList.remove('d-none');
 }
 
-document.querySelector('#new-post-form').addEventListener('submit', newFormHandler);
+document.querySelector('#new-post-form').addEventListener('submit', newPostFormHandler);

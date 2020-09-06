@@ -28,9 +28,9 @@ async function editFormHandler(event) {
 		alert(response.statusText);
   }
   
-	spinnerWrapper.classList.add('d-none');
-	spinner.classList.add('d-none');
-	form.classList.remove('d-none');
+	// spinnerWrapper.classList.add('d-none');
+	// spinner.classList.add('d-none');
+	// form.classList.remove('d-none');
 }
 
 document.querySelector('#edit-post-form').addEventListener('submit', editFormHandler);

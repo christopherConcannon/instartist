@@ -21,6 +21,7 @@ async function loginFormHandler(event) {
 			// document.location.replace('/');
 		} else {
       // alert(response.statusText);
+      document.location.replace('/login');
       return;
 		}
 	}

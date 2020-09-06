@@ -6,7 +6,7 @@ async function logout() {
 	});
 	// if user is successfully logged out, take them back to homepage
 	if (response.ok) {
-		document.location.replace('/');
+		document.location.replace('/homepage');
 	} else {
 		alert(response.statusText);
 	}
