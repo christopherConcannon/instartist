@@ -3,6 +3,11 @@ const { Post, User, Comment } = require('../../models');
 const withAuth = require('../../utils/auth');
 
 // GET /dashboard -- redirected on successful login/signup events in public/js/login.js and requested from dashboard button in nav
+
+//  Executing (default): SELECT `user`.`id`, `user`.`username`, `user`.`bio`, `user`.`medium`, `user`.`interests`, `user`.`user_img_url`, `posts`.`id` AS `posts.id`, `posts`.`title` AS `posts.title`, `posts`.`dimension` AS `posts.dimension`, `posts`.`description` AS `posts.description`, `posts`.`media` AS `posts.media`, `posts`.`img_url` AS `posts.img_url`, `posts`.`created_at` AS `posts.created_at` FROM `user` AS `user` LEFT OUTER JOIN `post` AS `posts` ON `user`.`id` = `posts`.`user_id` WHERE `user`.`id` = 11 ORDER BY `posts`.`created_at` DESC;
+// TypeError: Cannot read property 'get' of null
+// at C:\Users\cmcon\Desktop\ut coding program\MODULES\Module-15-and-16-PROJECT-TWO\instartist\controllers\viewRoutes\dashboard-routes.js:22:28
+// at processTicksAndRejections (internal/process/task_queues.js:97:5)
 router.get('/', withAuth, (req, res) => {
 	User.findOne({
 		where      : {
@@ -11,15 +16,24 @@ router.get('/', withAuth, (req, res) => {
 		attributes : [ 'id', 'username', 'bio', 'medium', 'interests', 'user_img_url' ],
 		include    : [
 			{
-        model      : Post,
-        attributes : [ 'id', 'title', 'dimension', 'description', 'media', 'img_url', 'created_at' ]
+				model      : Post,
+				attributes : [
+					'id',
+					'title',
+					'dimension',
+					'description',
+					'media',
+					'img_url',
+					'created_at'
+				]
 			}
-    ],
-    // To order by the attributes of an include, you don't put the order attribute inside the include - it has to go at the root of the options. You specify an array which traces it's way through the includes.
-    order      : [ [ Post, 'created_at', 'DESC' ] ]
+		],
+		// To order by the attributes of an include, you don't put the order attribute inside the include - it has to go at the root of the options. You specify an array which traces it's way through the includes.
+		order      : [ [ Post, 'created_at', 'DESC' ] ]
 	})
 		.then((dbUserData) => {
 			const user = dbUserData.get({ plain: true });
+			// console.log('user: ', user);
 
 			res.render('dashboard', {
 				user,

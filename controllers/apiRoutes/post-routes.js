@@ -8,18 +8,19 @@ const cloudinary = require('cloudinary').v2;
 // router.post('/', withAuth, (req, res) => {
 router.post('/', withAuth, imgUpload.single('work-img'), (req, res) => {
 	console.log('req.file:', req.file);
-	console.log("req.body", req.body);
+	console.log('req.body', req.body);
 	Post.create({
 		title       : req.body.title,
 		artist_name : req.body.artist,
 		dimension   : req.body.dimensions,
 		description : req.body.description,
 		media       : req.body.media,
-    img_url     : req.file.path,
-    public_id   : req.file.filename,
+		img_url     : req.file.path,
+		public_id   : req.file.filename,
 		user_id     : req.session.user_id
 	})
 		.then((dbPostData) => {
+			console.log('dbPostData: ', dbPostData);
 			req.flash('success', 'Your new work has been added!');
 			res.json(dbPostData);
 		})
@@ -34,48 +35,38 @@ router.post('/', withAuth, imgUpload.single('work-img'), (req, res) => {
 });
 
 // PUT /api/posts/1
+// NOTE...NEED TO ADD CONDITIONAL TO CHECK FOR REQ.FILE -- GETTING ERROR IF NO NEW IMAGE UPLOADED
+
 // upload new image to cloudinary in middleware, get back new req.file.path
 router.put('/:id', withAuth, imgUpload.single('work-img'), (req, res) => {
 	// find old public_id for image so we can delete it from cloudinary before updating the db with new path
 	Post.findOne(
 		{
-			attributes : [ 'title', 'public_id' ]
-		},
-		{
 			where : {
 				id : req.params.id
 			}
+		},
+		{
+			attributes : [ 'title', 'public_id' ]
 		}
-  )
-  // here is a problem...don't know why old public_id is "DEFAULT".  should be the one from the original post/previous update.  could be an async issue keeps the public_id from ever getting set?  and DEFAULT is in the seeds, I don't know why it would show up in a user created post?
-//   old post data post {
-//   dataValues: { title: 'Donec posuere metus vitae ipsum.', public_id: 'DEFAULT' },
-//   _previousDataValues: { title: 'Donec posuere metus vitae ipsum.', public_id: 'DEFAULT' },
-//   _changed: Set {},
-//   _options: {
-//     isNewRecord: false,
-//     _schema: null,
-//     _schemaDelimiter: '',
-//     raw: true,
-//     attributes: [ 'title', 'public_id' ]
-//   },
-//   isNewRecord: false
-// }
-// old public_id:  DEFAULT
-// old title:  Donec posuere metus vitae ipsum.
+	)
 		.then((oldPostData) => {
-			console.log('old post data', oldPostData);
+			// console.log('old post data', oldPostData);
 
 			const oldPublicId = oldPostData.get({ plain: true });
-			console.log('old public_id: ', oldPublicId.public_id);
-			console.log('old title: ', oldPublicId.title);
-			cloudinary.uploader.destroy(oldPublicId.public_id, () => {
+
+			// console.log('old public_id: ', oldPublicId.public_id);
+			// console.log('old title: ', oldPublicId.title);
+
+			cloudinary.uploader.destroy(oldPublicId.public_id, (err) => {
+				console.log(err);
 				console.log(oldPublicId, ' deleted');
 			});
+
 			Post.update(
 				{
-          title       : req.body.title,
-          artist_name : req.body.artist,
+					title       : req.body.title,
+					artist_name : req.body.artist,
 					dimension   : req.body.dimensions,
 					description : req.body.description,
 					media       : req.body.media,
@@ -88,12 +79,9 @@ router.put('/:id', withAuth, imgUpload.single('work-img'), (req, res) => {
 					}
 				}
 			).then((newPostData) => {
-				console.log('updated data:', newPostData);
+				// console.log('updated data:', newPostData);
 				if (!newPostData) {
-					console.log('no new post data');
-					const newData = newPostData.get({ plain: true });
-					console.log('updated public_id: ', newData.public_id);
-					console.log('updated title', newData.title);
+					// console.log('no new post data');
 					res.status(404).json({ message: 'No post found with this id' });
 					return;
 				}
@@ -115,29 +103,105 @@ router.put('/:id', withAuth, imgUpload.single('work-img'), (req, res) => {
 
 // DELETE /api/posts/1
 router.delete('/:id', withAuth, (req, res) => {
-	Comment.destroy({
-		where : {
-			post_id : req.params.id
-		}
-	}).then(() => {
-		Post.destroy({
+	Post.findOne(
+		{
 			where : {
 				id : req.params.id
 			}
-		})
-			.then((dbPostData) => {
-				if (!dbPostData) {
-					res.status(404).json({ message: 'No post found with this id' });
-					return;
+		},
+		{
+			attributes : [ 'title', 'public_id' ]
+		}
+	).then((delPostData) => {
+		// console.log('old post data', delPostData);
+
+		const delPublicId = delPostData.get({ plain: true });
+
+		// console.log('old public_id: ', delPublicId.public_id);
+		// console.log('old title: ', delPublicId.title);
+
+		cloudinary.uploader.destroy(delPublicId.public_id, (err) => {
+			// console.log(err);
+			// console.log(delPublicId, ' deleted');
+			Comment.destroy({
+				where : {
+					post_id : req.params.id
 				}
-				req.flash('success', 'Your work has been removed!');
-				res.json(dbPostData);
-			})
-			.catch((err) => {
-				console.log(err);
-				res.status(500).json(err);
+			}).then(() => {
+				Post.destroy({
+					where : {
+						id : req.params.id
+					}
+				})
+					.then((dbPostData) => {
+						if (!dbPostData) {
+							res
+								.status(404)
+								.json({ message: 'No post found with this id' });
+							return;
+						}
+						req.flash('success', 'Your work has been removed!');
+						res.json(dbPostData);
+					})
+					.catch((err) => {
+						console.log(err);
+						res.status(500).json(err);
+					});
 			});
+		});
 	});
 });
+
+// SAVED AS BACKUP FOR REFACTOR OF ABOVE DELETE ROUTE
+// // DELETE /api/posts/1
+// router.delete('/:id', withAuth, (req, res) => {
+// 	Post.findOne(
+// 		{
+// 			where : {
+// 				id : req.params.id
+// 			}
+// 		},
+// 		{
+// 			attributes : [ 'title', 'public_id' ]
+// 		}
+// 	).then((delPostData) => {
+// 		// console.log('old post data', delPostData);
+
+// 		const delPublicId = delPostData.get({ plain: true });
+
+// 		// console.log('old public_id: ', delPublicId.public_id);
+// 		// console.log('old title: ', delPublicId.title);
+
+// 		cloudinary.uploader.destroy(delPublicId.public_id, (err) => {
+// 			// console.log(err);
+// 			// console.log(delPublicId, ' deleted');
+// 			Comment.destroy({
+// 				where : {
+// 					post_id : req.params.id
+// 				}
+// 			}).then(() => {
+// 				Post.destroy({
+// 					where : {
+// 						id : req.params.id
+// 					}
+// 				})
+// 					.then((dbPostData) => {
+// 						if (!dbPostData) {
+// 							res
+// 								.status(404)
+// 								.json({ message: 'No post found with this id' });
+// 							return;
+// 						}
+// 						req.flash('success', 'Your work has been removed!');
+// 						res.json(dbPostData);
+// 					})
+// 					.catch((err) => {
+// 						console.log(err);
+// 						res.status(500).json(err);
+// 					});
+// 			});
+// 		});
+// 	});
+// });
 
 module.exports = router;

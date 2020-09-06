@@ -12,7 +12,7 @@ const postdata = [
 		media       : 'Morbi non quam',
 		img_url     :
 			'https://res.cloudinary.com/hvs67cwpo/image/upload/v1599177098/works/zag5gprhlrmdek0p5gez.jpg',
-		public_id   : 'DEFAULT',
+		public_id   : 'default',
 		user_id     : 10
 	},
 	{
@@ -23,7 +23,7 @@ const postdata = [
 		media       : 'Nunc purus.',
 		img_url     :
 			'https://res.cloudinary.com/hvs67cwpo/image/upload/v1599177075/works/mhvpp0p94opbscodph8n.jpg',
-		public_id   : 'DEFAULT',
+		public_id   : 'default',
 		user_id     : 8
 	},
 	{
@@ -35,7 +35,7 @@ const postdata = [
 		media       : 'Integer pede justo',
 		img_url     :
       'https://res.cloudinary.com/hvs67cwpo/image/upload/v1599177040/works/xsaht1anmot0vtsm9ogq.jpg',
-    public_id   : 'DEFAULT',
+    public_id   : 'default',
 		user_id     : 1
 	},
 	{
@@ -46,7 +46,7 @@ const postdata = [
 		media       : 'Nunc purus.',
 		img_url     :
       'https://res.cloudinary.com/hvs67cwpo/image/upload/v1599176147/works/re7yv38nmw8kq3wiiz7v.jpg',
-    public_id   : 'DEFAULT',
+    public_id   : 'default',
 		user_id     : 4
 	},
 	{
@@ -57,7 +57,7 @@ const postdata = [
 		media       : 'Integer pede justo',
 		img_url     :
       'https://res.cloudinary.com/hvs67cwpo/image/upload/v1599175794/works/wmljhjjlv2n4nyfg5cdh.jpg',
-    public_id   : 'DEFAULT',
+    public_id   : 'default',
 		user_id     : 7
 	},
 	{
@@ -68,7 +68,7 @@ const postdata = [
 		media       : 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.',
 		img_url     :
       'https://res.cloudinary.com/hvs67cwpo/image/upload/v1599175064/works/aen2w8zb79ewu0j9zqa7.jpg',
-    public_id   : 'DEFAULT',
+    public_id   : 'default',
 		user_id     : 4
 	},
 	{
@@ -79,7 +79,7 @@ const postdata = [
 		media       : 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.',
 		img_url     :
       'https://res.cloudinary.com/hvs67cwpo/image/upload/v1599174916/works/dyassx1ex0kybff8oxlg.jpg',
-    public_id   : 'DEFAULT',
+    public_id   : 'default',
 		user_id     : 1
 	},
 	{
@@ -90,7 +90,7 @@ const postdata = [
 		media       : 'Integer pede justo',
 		img_url     :
       'https://res.cloudinary.com/hvs67cwpo/image/upload/v1599166773/works/gh8jnbgog6kokk6d8mir.jpg',
-    public_id   : 'DEFAULT',
+    public_id   : 'default',
 		user_id     : 1
 	},
 	{
@@ -101,7 +101,7 @@ const postdata = [
 		media       : 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.',
 		img_url     :
       'https://res.cloudinary.com/hvs67cwpo/image/upload/v1599166654/works/svkp2cqdrbpemkzqb35m.jpg',
-    public_id   : 'DEFAULT',  
+    public_id   : 'default',  
 		user_id     : 9
 	},
 	{
@@ -112,7 +112,7 @@ const postdata = [
 		media       : 'Integer pede justo',
 		img_url     :
       'https://res.cloudinary.com/hvs67cwpo/image/upload/v1599164286/works/yozipetcdxwc9zvxnxwm.jpg',
-    public_id   : 'DEFAULT',
+    public_id   : 'default',
 		user_id     : 5
 	},
 	{
@@ -123,7 +123,7 @@ const postdata = [
 		media       : 'Integer pede justo',
 		img_url     :
       'https://res.cloudinary.com/hvs67cwpo/image/upload/v1599176762/works/rchteqaatt9z4iunh1lz.jpg',
-    public_id   : 'DEFAULT',
+    public_id   : 'default',
 		user_id     : 3
 	},
 	{
@@ -133,7 +133,7 @@ const postdata = [
 		description : 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.',
 		media       : 'Integer pede justo',
     img_url     : 'https://source.unsplash.com/1080x960/?art',
-    public_id   : 'DEFAULT',
+    public_id   : 'default',
 		user_id     : 10
 	},
 	{
@@ -143,7 +143,7 @@ const postdata = [
 		description : 'Integer pede justo',
 		media       : 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.',
     img_url     : 'https://source.unsplash.com/1080x960/?art',
-    public_id   : 'DEFAULT',
+    public_id   : 'default',
 		user_id     : 8
 	},
 	{
@@ -153,7 +153,7 @@ const postdata = [
 		description : 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.',
 		media       : 'Integer pede justo',
     img_url     : 'https://source.unsplash.com/1080x960/?art',
-    public_id   : 'DEFAULT',
+    public_id   : 'default',
 		user_id     : 3
 	},
 	{
@@ -164,7 +164,7 @@ const postdata = [
 		description : 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.',
 		media       : 'Integer pede justo',
     img_url     : 'https://source.unsplash.com/1080x960/?art',
-    public_id   : 'DEFAULT',
+    public_id   : 'default',
 		user_id     : 3
 	},
 	{
@@ -175,7 +175,7 @@ const postdata = [
 		description : 'Integer pede justo',
 		media       : 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.',
     img_url     : 'https://source.unsplash.com/1080x960/?art',
-    public_id   : 'DEFAULT',
+    public_id   : 'default',
 		user_id     : 7
 	},
 	{
@@ -185,7 +185,7 @@ const postdata = [
 		description : 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.',
 		media       : 'Integer pede justo',
     img_url     : 'https://source.unsplash.com/1080x960/?art',
-    public_id   : 'DEFAULT',
+    public_id   : 'default',
 		user_id     : 6
 	},
 	{
@@ -195,7 +195,7 @@ const postdata = [
 		description : 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.',
 		media       : 'Integer pede justo',
     img_url     : 'https://source.unsplash.com/1080x960/?art',
-    public_id   : 'DEFAULT',
+    public_id   : 'default',
 		user_id     : 4
 	},
 	{
@@ -205,7 +205,7 @@ const postdata = [
 		description : 'Integer pede justo',
 		media       : 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.',
     img_url     : 'https://source.unsplash.com/1080x960/?art',
-    public_id   : 'DEFAULT',
+    public_id   : 'default',
 		user_id     : 6
 	},
 	{
@@ -216,7 +216,7 @@ const postdata = [
 		description : 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.',
 		media       : 'Nulla ut erat',
     img_url     : 'https://source.unsplash.com/1080x960/?art',
-    public_id   : 'DEFAULT',
+    public_id   : 'default',
 		user_id     : 7
 	}
 ];
