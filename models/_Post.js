@@ -15,7 +15,7 @@ Post.init(
 			type: DataTypes.STRING,
 			allowNull: false
     },
-    artist_name: {
+		artist_name: {
       type: DataTypes.STRING,
 			allowNull: false
 		},
@@ -37,11 +37,6 @@ Post.init(
 			validate: {
 				isUrl: true
 			}
-    },
-    // file name of image in Cloudinary, needed for deleting
-    public_id: {
-      type: DataTypes.STRING,
-      allowNull: false
     },
 		user_id: {
 			type: DataTypes.INTEGER,

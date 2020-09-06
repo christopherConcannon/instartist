@@ -30,6 +30,9 @@ const storage = new CloudinaryStorage({
     // public_id: (req, file) => 'computed-filename-using-request'
   }
 });
+
+// possibly make new storage instance exported under separate multer call for avatar images
+
 const imgUpload = multer({ storage: storage });
 
 module.exports = imgUpload;
