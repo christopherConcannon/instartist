@@ -23,7 +23,7 @@ const sess = {
 	})
 };
 
-app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')))
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(session(sess));
 
 app.use(express.json());

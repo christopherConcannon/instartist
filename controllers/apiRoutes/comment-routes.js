@@ -35,8 +35,7 @@ router.post('/', withAuth, (req, res) => {
 	}
 });
 
-
-// NOT USING DELETE COMMENTS ROUTE
+// NOT USING DELETE COMMENTS ROUTE BUT IN PLACE FOR FUTURE ITERATIONS
 // // DELETE /api/comments/1
 // router.delete('/:id', withAuth, (req, res) => {
 // 	Post.destroy({
@@ -62,6 +61,7 @@ router.post('/', withAuth, (req, res) => {
 // 			res.status(500).json(err);
 // 		});
 // });
+
 // // DELETE /api/comments/1
 // router.delete('/:id', withAuth, (req, res) => {
 // 	Comment.destroy({

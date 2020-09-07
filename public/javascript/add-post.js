@@ -19,14 +19,9 @@ async function newPostFormHandler(event) {
 
 	if (response.ok) {
 		document.location.replace('/dashboard');
-		// document.location.replace('/');
 	} else {
 		alert(response.statusText);
 	}
-
-	// spinnerWrapper.classList.add('d-none');
-	// spinner.classList.add('d-none');
-	// form.classList.remove('d-none');
 }
 
 document.querySelector('#new-post-form').addEventListener('submit', newPostFormHandler);

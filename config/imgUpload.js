@@ -4,8 +4,8 @@ const multer = require('multer');
 
 // config using heroku cloudinary accout url
 cloudinary.config({
-  CLOUDINARY_URL: process.env.CLOUDINARY_URL
-})
+	CLOUDINARY_URL : process.env.CLOUDINARY_URL
+});
 
 // heroku config vars are lowercase!!!
 // cloudinary.config({
@@ -22,13 +22,12 @@ cloudinary.config({
 // });
 
 const storage = new CloudinaryStorage({
-  cloudinary: cloudinary,
-  params: {
-    folder: "works",
-    allowedFormats: ["jpg", "png"],
-    // transformation: [{ width: 500, height: 500, crop= "limit"}]
-    // public_id: (req, file) => 'computed-filename-using-request'
-  }
+	cloudinary : cloudinary,
+	params     : {
+		folder         : 'works',
+		allowedFormats : [ 'jpg', 'png' ]
+		// transformation: [{ width: 500, height: 500, crop= "limit"}]
+	}
 });
 
 // possibly make new storage instance exported under separate multer call for avatar images

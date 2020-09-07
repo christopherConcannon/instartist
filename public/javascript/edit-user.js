@@ -27,10 +27,6 @@ async function updateFormHandler(event) {
 	} else {
 		alert(response.statusText);
 	}
-
-	// spinnerWrapper.classList.add('d-none');
-	// spinner.classList.add('d-none');
-	// form.classList.remove('d-none');
 }
 
 document.querySelector('#udpate-user-form').addEventListener('submit', updateFormHandler);

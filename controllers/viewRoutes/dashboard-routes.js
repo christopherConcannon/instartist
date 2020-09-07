@@ -3,11 +3,6 @@ const { Post, User, Comment } = require('../../models');
 const withAuth = require('../../utils/auth');
 
 // GET /dashboard -- redirected on successful login/signup events in public/js/login.js and requested from dashboard button in nav
-
-//  Executing (default): SELECT `user`.`id`, `user`.`username`, `user`.`bio`, `user`.`medium`, `user`.`interests`, `user`.`user_img_url`, `posts`.`id` AS `posts.id`, `posts`.`title` AS `posts.title`, `posts`.`dimension` AS `posts.dimension`, `posts`.`description` AS `posts.description`, `posts`.`media` AS `posts.media`, `posts`.`img_url` AS `posts.img_url`, `posts`.`created_at` AS `posts.created_at` FROM `user` AS `user` LEFT OUTER JOIN `post` AS `posts` ON `user`.`id` = `posts`.`user_id` WHERE `user`.`id` = 11 ORDER BY `posts`.`created_at` DESC;
-// TypeError: Cannot read property 'get' of null
-// at C:\Users\cmcon\Desktop\ut coding program\MODULES\Module-15-and-16-PROJECT-TWO\instartist\controllers\viewRoutes\dashboard-routes.js:22:28
-// at processTicksAndRejections (internal/process/task_queues.js:97:5)
 router.get('/', withAuth, (req, res) => {
 	User.findOne({
 		where      : {
@@ -28,12 +23,11 @@ router.get('/', withAuth, (req, res) => {
 				]
 			}
 		],
-		// To order by the attributes of an include, you don't put the order attribute inside the include - it has to go at the root of the options. You specify an array which traces it's way through the includes.
+		// To order by the attributes of an include, don't put the order attribute inside the include - it has to go at the root of the options.  specify an array which traces it's way through the includes.
 		order      : [ [ Post, 'created_at', 'DESC' ] ]
 	})
 		.then((dbUserData) => {
 			const user = dbUserData.get({ plain: true });
-			// console.log('user: ', user);
 
 			res.render('dashboard', {
 				user,
@@ -54,8 +48,8 @@ router.get('/edit/:id', withAuth, (req, res) => {
 		},
 		attributes : [
 			'id',
-      'title',
-      'artist_name',
+			'title',
+			'artist_name',
 			'dimension',
 			'description',
 			'media',
@@ -141,7 +135,6 @@ router.get('/user/:id', withAuth, (req, res) => {
 				return;
 			}
 			const userMeta = dbUserData.get({ plain: true });
-			// console.log("user datos", userMeta)
 			// pass data to template
 			res.render('edit-user', {
 				userMeta,
@@ -153,39 +146,5 @@ router.get('/user/:id', withAuth, (req, res) => {
 			res.status(500).json(err);
 		});
 });
-
-// this is the dashboard routes for views!  this should not be here...path will be /dashboard/etc not /api/etc.  user related routes should be in api/user-routes.js
-
-// // DELETE /api/users/1
-// router.delete('/user/:id', withAuth, (req, res) => {
-// 	Post.destroy({   //delete post when delete a user
-// 		where:{
-// 			user_id: req.params.id
-// 		}
-
-// 	})
-// 	Comment.destroy({
-// 		where : {
-// 			user_id : req.params.id
-// 		}
-// 	}).then(() => {
-// 		User.destroy({
-// 			where : {
-// 				id : req.params.id
-// 			}
-// 		})
-// 			.then((dbUserData) => {
-// 				if (!dbUserData) {
-// 					res.status(404).json({ message: 'No user found with this id' });
-// 					return;
-// 				}
-// 				res.json(dbUserData);
-// 			})
-// 			.catch((err) => {
-// 				console.log(err);
-// 				res.status(500).json(err);
-// 			});
-// 	});
-// });
 
 module.exports = router;

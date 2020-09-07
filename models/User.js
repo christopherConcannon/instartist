@@ -10,55 +10,55 @@ class User extends Model {
 
 User.init(
 	{
-		id: {
-			type: DataTypes.INTEGER,
-			allowNull: false,
-			primaryKey: true,
-			autoIncrement: true
+		id           : {
+			type          : DataTypes.INTEGER,
+			allowNull     : false,
+			primaryKey    : true,
+			autoIncrement : true
 		},
 
-		username: {
-			type: DataTypes.STRING,
-			unique: true,
-			allowNull: false
+		username     : {
+			type      : DataTypes.STRING,
+			unique    : true,
+			allowNull : false
 		},
-		email: {
-			type: DataTypes.STRING,
-			allowNull: false,
-			unique: true,
-			validate: {
-				isEmail: true
+		email        : {
+			type      : DataTypes.STRING,
+			allowNull : false,
+			unique    : true,
+			validate  : {
+				isEmail : true
 			}
 		},
-		password: {
-			type: DataTypes.STRING,
-			allowNull: false,
-			validate: {
-				len: [4]
+		password     : {
+			type      : DataTypes.STRING,
+			allowNull : false,
+			validate  : {
+				len : [ 4 ]
 			}
-		},	 
-    bio: {
-      type: DataTypes.STRING,
-      allowNull: true
-    },
-    medium: {
-      type: DataTypes.STRING,
-      allowNull: true
-    },
-    interests: {
-      type: DataTypes.STRING,
-      allowNull: true
-    },
-    user_img_url: { // isUrl: true,   ver q va a guardar
-      type: DataTypes.STRING,
-      allowNull: true,
-			validate: {
-				isUrl: true
+		},
+		bio          : {
+			type      : DataTypes.STRING,
+			allowNull : true
+		},
+		medium       : {
+			type      : DataTypes.STRING,
+			allowNull : true
+		},
+		interests    : {
+			type      : DataTypes.STRING,
+			allowNull : true
+		},
+		user_img_url : {
+			type      : DataTypes.STRING,
+			allowNull : true,
+			validate  : {
+				isUrl : true
 			}
-    }
+		}
 	},
 	{
-		hooks: {
+		hooks           : {
 			async beforeCreate(newUserData) {
 				newUserData.password = await bcrypt.hash(newUserData.password, 10);
 				return newUserData;
@@ -73,10 +73,10 @@ User.init(
 			}
 		},
 		sequelize,
-		timestamps: false,
-		freezeTableName: true,
-		underscored: true,
-		modelName: 'user'
+		timestamps      : false,
+		freezeTableName : true,
+		underscored     : true,
+		modelName       : 'user'
 	}
 );
 

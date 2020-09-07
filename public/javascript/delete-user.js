@@ -21,7 +21,7 @@ async function deleteUserFormHandler(event) {
 		method : 'DELETE'
 	});
 	console.log(response);
-	logout(); //call a function for logaout the user has been delete
+	logout(); //call a function to log out the user once deleted
 }
 
 document.querySelector('#delete').addEventListener('click', deleteUserFormHandler);
