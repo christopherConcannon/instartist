@@ -62,6 +62,20 @@ const imgUpload = require('../../config/imgUpload');
 
 // POST /api/users -- create user on signup
 router.post('/', imgUpload.single('user-img'), (req, res) => {
+	// build user object
+	const userObj = {
+		username  : req.body.username,
+		email     : req.body.email,
+		password  : req.body.password,
+		bio       : req.body.bio,
+		medium    : req.body.medium,
+		interests : req.body.interests
+	};
+
+	// if there was a picture uploaded
+	if (req.file) {
+		user_img_url: req.file.path;
+	}
 	// check for unique username
 	User.findOne({
 		where : {
@@ -80,51 +94,51 @@ router.post('/', imgUpload.single('user-img'), (req, res) => {
 			}
 			// need conditional here to check if user uploaded image.  will throw error if no req.file  TypeError: Cannot read property 'path' of undefined
 			// this works but not DRY.  how to refactor?
-			if (req.file) {
-				User.create({
-					username     : req.body.username,
-					email        : req.body.email,
-					password     : req.body.password,
-					bio          : req.body.bio,
-					medium       : req.body.medium,
-					interests    : req.body.interests,
-					user_img_url : req.file.path
-				}).then((dbUserData) => {
-					req.session.save(() => {
-						req.session.user_id = dbUserData.id;
-						req.session.username = dbUserData.username;
-						req.session.loggedIn = true;
 
-						req.flash(
-							'success',
-							`Hi ${req.session.username}, welcome to Instartist!`
-						);
-						res.json(dbUserData);
-					});
-				});
-			} else {
-				// create user without avator
-				User.create({
-					username  : req.body.username,
-					email     : req.body.email,
-					password  : req.body.password,
-					bio       : req.body.bio,
-					medium    : req.body.medium,
-					interests : req.body.interests
-				}).then((dbUserData) => {
-					req.session.save(() => {
-						req.session.user_id = dbUserData.id;
-						req.session.username = dbUserData.username;
-						req.session.loggedIn = true;
+			User.create({
+				username     : req.body.username,
+				email        : req.body.email,
+				password     : req.body.password,
+				bio          : req.body.bio,
+				medium       : req.body.medium,
+				interests    : req.body.interests,
+				user_img_url : req.file.path
+			}).then((dbUserData) => {
+				req.session.save(() => {
+					req.session.user_id = dbUserData.id;
+					req.session.username = dbUserData.username;
+					req.session.loggedIn = true;
 
-						req.flash(
-							'success',
-							`Hi ${req.session.username}, welcome to Instartist!`
-						);
-						res.json(dbUserData);
-					});
+					req.flash(
+						'success',
+						`Hi ${req.session.username}, welcome to Instartist!`
+					);
+					res.json(dbUserData);
 				});
-			}
+			});
+			// } else {
+			// 	// create user without avator
+			// 	User.create({
+			// 		username  : req.body.username,
+			// 		email     : req.body.email,
+			// 		password  : req.body.password,
+			// 		bio       : req.body.bio,
+			// 		medium    : req.body.medium,
+			// 		interests : req.body.interests
+			// 	}).then((dbUserData) => {
+			// 		req.session.save(() => {
+			// 			req.session.user_id = dbUserData.id;
+			// 			req.session.username = dbUserData.username;
+			// 			req.session.loggedIn = true;
+
+			// 			req.flash(
+			// 				'success',
+			// 				`Hi ${req.session.username}, welcome to Instartist!`
+			// 			);
+			// 			res.json(dbUserData);
+			// 		});
+			// 	});
+			// }
 		})
 		.catch((err) => {
 			console.log(err);
