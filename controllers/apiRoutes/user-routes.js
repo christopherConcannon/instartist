@@ -72,10 +72,11 @@ router.post('/', imgUpload.single('user-img'), (req, res) => {
 		interests : req.body.interests
 	};
 
-	// if there was a picture uploaded
+	// if there was a picture uploaded add to userObj
 	if (req.file) {
-		user_img_url: req.file.path;
+		userObj.user_img_url = req.file.path;
 	}
+
 	// check for unique username
 	User.findOne({
 		where : {
@@ -92,18 +93,9 @@ router.post('/', imgUpload.single('user-img'), (req, res) => {
 				res.status(409).json({ message: 'Username already exists' });
 				return;
 			}
-			// need conditional here to check if user uploaded image.  will throw error if no req.file  TypeError: Cannot read property 'path' of undefined
-			// this works but not DRY.  how to refactor?
 
-			User.create({
-				username     : req.body.username,
-				email        : req.body.email,
-				password     : req.body.password,
-				bio          : req.body.bio,
-				medium       : req.body.medium,
-				interests    : req.body.interests,
-				user_img_url : req.file.path
-			}).then((dbUserData) => {
+			// if user name available, create new user
+			User.create(userObj).then((dbUserData) => {
 				req.session.save(() => {
 					req.session.user_id = dbUserData.id;
 					req.session.username = dbUserData.username;
@@ -116,29 +108,6 @@ router.post('/', imgUpload.single('user-img'), (req, res) => {
 					res.json(dbUserData);
 				});
 			});
-			// } else {
-			// 	// create user without avator
-			// 	User.create({
-			// 		username  : req.body.username,
-			// 		email     : req.body.email,
-			// 		password  : req.body.password,
-			// 		bio       : req.body.bio,
-			// 		medium    : req.body.medium,
-			// 		interests : req.body.interests
-			// 	}).then((dbUserData) => {
-			// 		req.session.save(() => {
-			// 			req.session.user_id = dbUserData.id;
-			// 			req.session.username = dbUserData.username;
-			// 			req.session.loggedIn = true;
-
-			// 			req.flash(
-			// 				'success',
-			// 				`Hi ${req.session.username}, welcome to Instartist!`
-			// 			);
-			// 			res.json(dbUserData);
-			// 		});
-			// 	});
-			// }
 		})
 		.catch((err) => {
 			console.log(err);
@@ -148,59 +117,39 @@ router.post('/', imgUpload.single('user-img'), (req, res) => {
 
 // PUT /api/users/1
 router.put('/:id', withAuth, imgUpload.single('user-img'), (req, res) => {
-	// check if user uploaded image...AGAIN NOT DRY...NEED REFACTOR!
+	// build user object
+	const userObj = {
+		username  : req.body.username,
+		email     : req.body.email,
+		password  : req.body.password,
+		bio       : req.body.bio,
+		medium    : req.body.medium,
+		interests : req.body.interests
+	};
+
+	// if there was a picture uploaded add to userObj
 	if (req.file) {
-		User.update(
-			{
-				bio          : req.body.bio,
-				medium       : req.body.medium,
-				interests    : req.body.interests,
-				user_img_url : req.file.path
-			},
-			{
-				where : {
-					id : req.params.id
-				}
-			}
-		)
-			.then((dbUserData) => {
-				if (!dbUserData) {
-					res.status(404).json({ message: 'No user found with this id' });
-					return;
-				}
-				req.flash('success', 'Your user info has been updated!');
-				res.json(dbUserData);
-			})
-			.catch((err) => {
-				console.log(err);
-				res.status(500).json(err);
-			});
-	} else {
-		User.update(
-			{
-				bio       : req.body.bio,
-				medium    : req.body.medium,
-				interests : req.body.interests
-			},
-			{
-				where : {
-					id : req.params.id
-				}
-			}
-		)
-			.then((dbUserData) => {
-				if (!dbUserData) {
-					res.status(404).json({ message: 'No user found with this id' });
-					return;
-				}
-				req.flash('success', 'Your user info has been updated!');
-				res.json(dbUserData);
-			})
-			.catch((err) => {
-				console.log(err);
-				res.status(500).json(err);
-			});
+		userObj.user_img_url = req.file.path;
 	}
+	// check if user uploaded image...AGAIN NOT DRY...NEED REFACTOR!
+
+	User.update(userObj, {
+		where : {
+			id : req.params.id
+		}
+	})
+		.then((dbUserData) => {
+			if (!dbUserData) {
+				res.status(404).json({ message: 'No user found with this id' });
+				return;
+			}
+			req.flash('success', 'Your user info has been updated!');
+			res.json(dbUserData);
+		})
+		.catch((err) => {
+			console.log(err);
+			res.status(500).json(err);
+		});
 });
 
 // DELETE /api/users/1
