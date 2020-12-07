@@ -86,7 +86,7 @@ NONE
 - HTML/CSS
 - BOOTSTRAP	
 - GITHUB
-- HEROHU
+- HEROKU
 
     
 # Contributors
