@@ -6,7 +6,7 @@
 
 # Description
 
-Instartist is a social media application for virtually exhibiting works created by artists; provides a community to display and share the perspective of works of art of all kinds, where users can interact with these works and leave their comments. Both artists and users will create their accounts where they can upload a profile picture and information about themselves.
+Instartist is a social media application for virtually exhibiting works created by artists; provides a community to display and share the perspective of works of art of all kinds, where users can interact with these works and leave their comments. Both artists and users will create their accounts where they can upload a profile picture and information about themselves. 
 
 
  ![Homepage](./public/images/home-page.jpg)
