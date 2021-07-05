@@ -111,7 +111,7 @@ NONE
  
   Email acount:
 - Darius: [dwright758@gmail.com](mailto:dwright758@gmail.com)
-- Demario: [dwill2thin@gmail.com](mailto:dwill2thin@gmail.com)
+- Demario: [dwill2think@gmail.com](mailto:dwill2think@gmail.com)
 - Annia: [annia.valdes@gmail.com](mailto:annia.valdes@gmail.com)
 - Christopher: [cmcon@yahoo.com](mailto:cmcon@yahoo.com)
 - Claudia: [claudialay41@gmail.com](mailto:claudialay41@gmail.com)
